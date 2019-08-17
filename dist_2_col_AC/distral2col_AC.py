@@ -23,10 +23,15 @@ parser.add_argument('--log-interval', type=int, default=5, metavar='N',
 args = parser.parse_args()
 
 import sys
-sys.path.append('envs/')
+sys.path.append('../envs/')
 from gridworld_env import GridworldEnv
 
 class Policy(nn.Module):
+    '''
+    This is the function approximation for Q_i(s,a) for each task.
+    The task-specific policy pi_i(a|s) and state-value estimates
+    are derived from the Q values.
+    '''
 
     def __init__(self, input_size, num_actions ):
 
@@ -50,6 +55,10 @@ class Policy(nn.Module):
         return value_est
 
 class Distilled(nn.Module):
+    '''
+    This is the function approximations for distilled policy
+    and its action preferences.
+    '''
 
     def __init__(self, input_size, num_actions, num_tasks):
 
@@ -88,7 +97,7 @@ def select_action(state, policy, distilled, task_id, alpha, beta):
     # Run the policy
     Q = policy.forward(Variable(state))
 
-    # calculate the numerator of equation 8
+    # calculate the numerator of equation 8 from Teh et al.
     term = alpha*action_pref_0 + beta*Q
     max_term = torch.max(term)
 
@@ -96,7 +105,7 @@ def select_action(state, policy, distilled, task_id, alpha, beta):
     pi_i = torch.exp(term-max_term)/(torch.exp(term-max_term).sum())
     policy.pi_prob.append(pi_i)
 
-    # Obtain the most probable action for the policy
+    # Obtain an action by sampling from pi_i
     m = Categorical(pi_i)
     action =  m.sample() 
     policy.saved_actions.append( m.log_prob(action))
@@ -105,10 +114,9 @@ def select_action(state, policy, distilled, task_id, alpha, beta):
 
     # Obtain the most probably action for the distilled policy
     m = Categorical(probs0)
-    # action_tmp =  m.sample() 
     distilled.saved_actions[task_id].append( m.log_prob(action) )
 
-    # Return the most probable action for the policy
+    # Return the sampled action for the policy
     return action
 
 
@@ -122,10 +130,14 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     beta = torch.Tensor([beta])
     gamma = torch.Tensor([gamma])
 
+    # get task-specific rewards for current episode
     rewards = policy.rewards
+    # get log prob of pi_i(a|s) for task i
     policy_actions = policy.saved_actions
+    # get log prob of pi_0(a|s) from distilled policy
     distill_actions = distilled.saved_actions[task_id]
 
+    # get prob distributions pi_i and pi_0
     pi_probs = torch.stack(policy.pi_prob)
     p0_probs = torch.stack(distilled.pi_prob[task_id])
 
@@ -136,22 +148,26 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     states, actions = np.asarray(policy.state_action)[:,0], np.asarray(policy.state_action)[:,1]
     states, actions = np.array([*states]), np.array([*actions]).reshape(-1,1)
 
+    # get the estimated Q-values
     q_thetas = policy(torch.Tensor(states))
 
-    # q_thetas = q_thetas.gather(1,torch.tensor(actions))
-    v_thetas = torch.log((torch.pow(p0_probs,alpha) * torch.exp(beta*q_thetas)).sum(1)) / beta # from equation 55 bekerley paper
-    # v_thetas = torch.log((p0_probs* torch.exp(beta*q_thetas)).sum(1)) / beta
+    # get v_theta as stated from equation 55 from Schulman et al. and equation 7 from Teh et al.
+    v_thetas = torch.log((torch.pow(p0_probs,alpha) * torch.exp(beta*q_thetas)).sum(1)) / beta 
 
     q_values = np.zeros(len(states))
+    # get the value of the last state the agent transitioned to
     v_val = final_state_value
 
-    # n step td learning, n = 10
+    # n step td learning
     reg_rewards = []
     n = 1
+    # get the vector of discount factors
     gammas = [gamma**i for i in range(n)]
+    # get the regularized rewards
     for t in range(len(rewards)):
         reg_rewards.append(rewards[t] + (alpha/beta)*distill_actions[t] - (1./beta)*policy_actions[t])
 
+    # get the q values
     for t in reversed(range(len(rewards)-n)):
         reg_reward = [g*rwd for g,rwd in zip(gammas,reg_rewards[t:t+n])]
         qval = np.sum(reg_reward) + gamma**n * v_val
@@ -159,29 +175,31 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
         v_val = v_thetas[t]
 
     q_values = torch.tensor(q_values).float().unsqueeze(1).detach()
-    # q_values = (q_values - q_values.mean())/(q_values.std() + 1e-15)
 
     # MSE for 1 step TD
     # critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
     critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
 
-    # get losses for current task, from equation 9
+    # get losses for current task, from equation 9 from Teh et al.
     for t, (log_prob_i) in enumerate(policy_actions): 
         advantage = (q_values[t] - v_thetas[t]).detach()
         task_policy_loss.append(log_prob_i * advantage)
 
     opt_policy.zero_grad()
 
+    # invert the sign of policy grad because we want to maximize the original objective
     loss = -(torch.stack(task_policy_loss).mean()) + critic_loss
 
     loss.backward(retain_graph=True)
 
+    # gradient clipping
     for param in policy.parameters():
         if param.grad is not None:
             param.grad.data.clamp_(-1, 1)
 
     opt_policy.step()
 
+    # return the sum of policy grad for equation 10 from Teh et al.
     return torch.stack(task_policy_loss).sum()
 
 
@@ -219,9 +237,6 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
     opt_distilled.zero_grad()
 
     loss =  -(torch.stack(task_specific_loss).sum() + (alpha/beta) * torch.stack(mismatch_loss).sum())
-
-    # print(torch.stack(task_specific_loss).sum())
-    # print((alpha/beta) * torch.stack(mismatch_loss).sum())
 
     loss.backward(retain_graph=True)
 
