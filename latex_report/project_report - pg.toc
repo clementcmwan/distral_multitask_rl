@@ -52,8 +52,8 @@
 \contentsline {subsection}{\numberline {3.3.2}Distral 2 col vs A3C}{48}% 
 \contentsline {subsubsection}{Environment 4 and 5}{48}% 
 \contentsline {subsubsection}{Environment 7 and 8}{48}% 
-\contentsline {subsubsection}{Environments 4, 5 and 7}{48}% 
+\contentsline {subsubsection}{Environments 4, 5 and 7}{49}% 
 \contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{49}% 
 \contentsline {section}{\numberline {3.4}Distral 1 col vs Distral 2 col}{49}% 
-\contentsline {chapter}{\numberline {4}Conclusion and Suggestions on Further Work}{50}% 
-\contentsline {chapter}{\numberline {A}Figures, tables and pseudocode}{55}% 
+\contentsline {chapter}{\numberline {4}Conclusion and Suggestions on Further Work}{51}% 
+\contentsline {chapter}{\numberline {A}Figures, tables and pseudocode}{56}% 

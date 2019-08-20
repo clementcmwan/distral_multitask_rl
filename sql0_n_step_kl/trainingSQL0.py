@@ -104,4 +104,4 @@ def trainSQL0(file_name="SQL0", env=GridworldEnv(1), batch_size=128,
 
 if __name__ == '__main__':
     # trainSQL0(env=GridworldEnv(4), learning_rate=0.00001, max_num_steps_per_episode=100, num_episodes=1000)
-    trainSQL0(env=GridworldEnv(8), learning_rate=0.001, max_num_steps_per_episode=100, num_episodes=1000, n_step=10, target_update=10)
+    trainSQL0(env=GridworldEnv(8), learning_rate=0.001, max_num_steps_per_episode=100, num_episodes=1000, n_step=10, target_update=100)

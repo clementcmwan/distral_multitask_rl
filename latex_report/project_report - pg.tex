@@ -1070,6 +1070,7 @@ As shown above, Distral 1 col via regularized Actor Critic exhibits the similar 
 \includegraphics[width=\textwidth]{figs/d1_col_ac/d1_col_ac_4_5_7_dur.png}
 \end{minipage}%
 \end{figure}
+Here we observe that the Distral algorithm performs worse as it takes on more environments. Specifically, we see that it did not even manage to find the solution for enviroment 5, which is an easy environment compared to 5 and 7.
 
 \subsubsection{Environments 4, 5, 6, 7, 8}
 \begin{figure}[H]
@@ -1084,6 +1085,7 @@ As shown above, Distral 1 col via regularized Actor Critic exhibits the similar 
 \includegraphics[width=\textwidth]{figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png}
 \end{minipage}%
 \end{figure}
+Here we see that the behaviour of the algorithm is consistent with previous observations. None of the environments were solved.
 
 \subsection{Distral 2 col vs A3C}
 \subsubsection{Environment 4 and 5}
@@ -1099,6 +1101,7 @@ As shown above, Distral 1 col via regularized Actor Critic exhibits the similar 
 \includegraphics[width=\textwidth]{figs/d2_col_ac/d2_col_ac_4_5_dur.png}
 \end{minipage}%
 \end{figure}
+Here we see that Distral 2 col under AC framework exhibits similar behaviour compared to Distral 1 col under Ac. Specifically, we see that environment 4 did not converge and has consistently taken over 200 episodes to reach the terminal state. However, we should also note that Distral 2 col under AC managed to solve environment 5.
 
 \subsubsection{Environment 7 and 8}
 \begin{figure}[H]
@@ -1113,6 +1116,7 @@ As shown above, Distral 1 col via regularized Actor Critic exhibits the similar 
 \includegraphics[width=\textwidth]{figs/d2_col_ac/d2_col_ac_7_8_dur.png}
 \end{minipage}%
 \end{figure}
+Here we see that the algorithm did not solve either of the environments. Again, the algorithm appears to have numerical stability issues consistent to the results for environments 4 and 5, and the behaviour of Distral 1 col AC.
 
 \subsubsection{Environments 4, 5 and 7}
 \begin{figure}[H]
@@ -1160,11 +1164,11 @@ To assess the overall performance of all Distral algorithms across different arc
 \end{minipage}%
 \end{figure}
 
-As shown above, Distral 2 columns implemented via SQL is by far the most effective algorithm comparing to other variants. Several reasons can be considered in order to explain this phenomenon. First, the difference in performance between Distral 2 col SQL and Distral 2 col SQL is likely due to the fact that the architecture of Distral 2 col in defining task-specific policy in terms of the distilled policy. Specifically, recall that the task-specific policy defined in Distral 2 col is 
+As shown above, Distral 2 columns implemented via SQL is by far the most effective algorithm comparing to other variants. Several reasons can be considered in order to explain this phenomenon. First, the difference in performance between Distral 1 col and Distral 1 col in both frameworks is likely due to the fact that the architecture of Distral 2 col defines task-specific policy in terms of the distilled policy. Specifically, recall that the task-specific policy defined in Distral 2 col is 
 \begin{align}
 \hat{\pi}_i(a_t|s_t) &= \frac{\exp(\alpha h_{\theta_0}(a_t| s_t) + \beta f_{\theta_i}(a_t | s_t))}{\sum_{a^\prime}\exp(\alpha h_{\theta_0}(a^\prime_t | s_t) + \beta f_{\theta_i}(a^\prime _t | s_t))} \nonumber
 \end{align}
-whereas the task-specific policy in Distral 1 is simply the softmax over $f_{\theta_i}(a_t | s_t)$
+whereas the task-specific policy in Distral 1 is simply softmax over the logits $f_{\theta_i}(a_t | s_t)$. This gives Distral 1 col a significant disadvantage as the rewards are defined in terms of both the task-specific and distilled policies. Furthermore, both the regularized rewards and the distilled policy are used to optimize the task-specific policy respectively in the SQL and regularized AC frameworks.
 
 
 

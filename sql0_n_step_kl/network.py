@@ -116,5 +116,5 @@ def optimize_model(model, target_model, optimizer, memory, BATCH_SIZE, GAMMA, BE
     optimizer.zero_grad()
     loss.backward()
     for param in model.parameters():
-        param.grad.data.clamp_(-500, 500)
+        param.grad.data.clamp_(-100, 100)
     optimizer.step()
