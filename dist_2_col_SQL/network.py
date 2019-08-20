@@ -73,57 +73,53 @@ def select_action(state, policy, model, num_actions,
 
     with torch.no_grad():
         Q = model(Variable(state).type(FloatTensor))
-        
-        #### FOUND ERROR: ( Q ) returns a tensor of nan at some point
-        # if np.isnan( Q.sum(1).data[0]) :
-        #     print("Q = ", Q)
-        #     print("state = ", state)
 
+        # get action pref from pi_0
         pi0_a_pref = policy.forward_action_pref(Variable(state).type(FloatTensor))
 
-        # calculate the numerator of equation 8
+        # calculate the numerator of equation 8 from Teh et al.
         term = alpha*pi0_a_pref + beta*Q
         max_term = torch.max(term)
         
-        # get equation 8, pi_i(a_t | s_t)
+        # get equation 8, pi_i(a_t | s_t) from Teh et al.
         pi_i = torch.exp(term-max_term)/(torch.exp(term-max_term).sum(1))
 
+        # pick the action according to pi_i given current state
+        action = torch.tensor([np.random.choice(num_actions, 1, p=pi_i.numpy()[0])])
 
-        # debugging for previous encounters of nan
-        try:
-            choice = torch.tensor([np.random.choice(num_actions, 1, p=pi_i.numpy()[0])])
-        except:
-            temp = model(Variable(state))
-            print(temp)
-            term = alpha*pi0_a_pref + beta*temp
-            max_term = torch.max(term)
-            print(torch.exp(term-max_term)/(torch.exp(term-max_term).sum(1)))
-            print(pi_i)
+    return action
 
-    return choice
-
-# opt distilled policy using equation 5
 def optimize_policy(policy, optimizer, memories, batch_size,
                     num_envs, gamma, alpha, beta):
+    '''
+    Optimize the distilled policy via stochastic gradient descent
+    by sampling from equation 5 from Teh et al.
+    '''
+
     loss = 0
     for i_env in range(num_envs):
+        # determine sample size
         size_to_sample = np.minimum(batch_size, len(memories[i_env]))
+
+        # extract sample
         transitions = memories[i_env].policy_sample(size_to_sample)
+
+        # format sampled batch
         batch = Transition(*zip(*transitions))
-        
-        state_batch = Variable(torch.cat(batch.state))
-        time_batch = Variable(torch.cat(batch.time))
 
-        # this is wrong.
-        # actions = np.array([action.numpy()[0][0] for action in batch.action])
-
+        # format state, time and action batch
+        state_batch = torch.cat(batch.state)
+        time_batch = torch.cat(batch.time)
         action_batch = torch.cat(batch.action)
+
+        # add to current loss according to equation 5 from Teh et al.
         cur_loss = (torch.pow(Variable(Tensor([gamma])), time_batch) *
             torch.log(policy(state_batch).gather(1, action_batch))).sum()
 
         loss -= cur_loss
 
-    # loss = Variable(Tensor([alpha/beta]))*loss
+    loss = (alpha/beta) * loss
+
     optimizer.zero_grad()
     loss.backward()
 
@@ -135,35 +131,37 @@ def optimize_policy(policy, optimizer, memories, batch_size,
 # this is the SQL part for each task specific policy
 def optimize_model(policy, model, optimizer, memory, batch_size,
                     alpha, beta, gamma):
+    '''
+    Optimize w.r.t. task-specific policies via MSE and TD-learning
+    '''
+
     if len(memory) < batch_size:
         return
     transitions = memory.sample(batch_size)
-    # Transpose the batch (see http://stackoverflow.com/a/19343/3343043 for
-    # detailed explanation).
+    # format transition tuple
     batch = Transition(*zip(*transitions))
 
     # Compute a mask of non-final states and concatenate the batch elements
     non_final_mask = ByteTensor(tuple(map(lambda s: s is not None,
                                           batch.next_state)))
-    # We don't want to backprop through the expected action values and volatile
-    # will save us on temporarily changing the model parameters'
-    # requires_grad to False!
-    non_final_next_states = torch.cat([s for s in batch.next_state if s is not None])
-    # non_final_next_states.requires_grad = False
 
+    # extract all none terminal next states
+    non_final_next_states = torch.cat([s for s in batch.next_state if s is not None])
+
+    # format state, action and rewards
     state_batch = torch.cat(batch.state)
     action_batch = torch.cat(batch.action)
     reward_batch = torch.cat(batch.reward)
 
-    # calculate the numerator of equation 8
+    # calculate the numerator of equation 8 from Teh et al.
     pi0_a_pref = policy.forward_action_pref(state_batch)
     term = alpha*pi0_a_pref + beta*model(state_batch)
     max_term = torch.max(term, 1)[0].unsqueeze(1)
 
-    # get equation 8, pi_i(a_t | s_t)
+    # get pi_i(a_t | s_t) via equation 8 from Teh et al.
     pi_i = torch.exp(term-max_term)/(torch.exp(term-max_term).sum(1).unsqueeze(1))
 
-    # reg rewards
+    # compute regularized rewards as defined in Teh et al.
     reward_batch = (reward_batch.unsqueeze(1) + (alpha/beta)*torch.log(policy.forward(state_batch).gather(1, action_batch))
                      - (1/beta)*torch.log(pi_i.gather(1, action_batch)))
 
@@ -171,23 +169,16 @@ def optimize_model(policy, model, optimizer, memory, batch_size,
     # columns of actions taken
     state_action_values = model(state_batch).gather(1, action_batch)
 
-    # Compute V(s_{t+1}) for all next states, 2nd component of equation 7
+    # Compute V(s_{t+1}) for all next states, 2nd component of equation 7 from Teh et al.
     next_state_values = torch.zeros(batch_size).type(Tensor)
     next_state_values[non_final_mask] = ( torch.log(
         (torch.pow(policy.forward(non_final_next_states), alpha)
         * (torch.exp(beta * model(non_final_next_states)) + 1e-16)).sum(1)) / beta ).detach()
-    
-    if np.isnan(next_state_values.sum().data.numpy()):
-        print('true')
 
-    # Now, we don't want to mess up the loss with a volatile flag, so let's
-    # clear it. After this, we'll just end up with a Variable that has
-    # requires_grad=False
-    # next_state_values.volatile = False
     # Compute the expected Q values
     expected_state_action_values = (next_state_values.unsqueeze(1) * gamma) + reward_batch
 
-    # Compute Huber loss
+    # Compute loss
     loss = F.mse_loss(state_action_values, expected_state_action_values)
     # loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
 

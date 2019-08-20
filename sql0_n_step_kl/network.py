@@ -88,12 +88,14 @@ def optimize_model(model, target_model, optimizer, memory, BATCH_SIZE, GAMMA, BE
     term = target_model(non_final_next_states)
     max_term = term.max(1)[0].unsqueeze(1)
     pi_prob = torch.exp(term + max_term) / torch.exp(term + max_term).sum(1).unsqueeze(1)
+
+    # pi_prob = F.softmax(target_model(non_final_next_states), dim=1)
     pi_prob = pi_prob.gather(1, non_final_next_states_action)
 
     expected_values_V = pi_prob * torch.exp(BETA * target_model(non_final_next_states)).sum(1).unsqueeze(1)
 
     next_state_values[non_final_mask] = (torch.log( expected_values_V.sum(1) ) / BETA).detach()
-    next_state_values[non_final_mask] = (next_state_values[non_final_mask] - next_state_values[non_final_mask].mean()) - next_state_values[non_final_mask].std()
+    # next_state_values[non_final_mask] = (next_state_values[non_final_mask] - next_state_values[non_final_mask].mean()) - next_state_values[non_final_mask].std()
 
     # Now, we don't want to mess up the loss with a volatile flag, so let's
     # clear it. After this, we'll just end up with a Variable that has
@@ -113,6 +115,6 @@ def optimize_model(model, target_model, optimizer, memory, BATCH_SIZE, GAMMA, BE
     # Optimize the model
     optimizer.zero_grad()
     loss.backward()
-    # for param in model.parameters():
-    #     param.grad.data.clamp_(-500, 500)
+    for param in model.parameters():
+        param.grad.data.clamp_(-500, 500)
     optimizer.step()

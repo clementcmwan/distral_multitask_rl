@@ -177,13 +177,18 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     q_values = torch.tensor(q_values).float().unsqueeze(1).detach()
 
     # MSE for 1 step TD
-    # critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
-    critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
+    critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
+    # critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
 
     # get losses for current task, from equation 9 from Teh et al.
+    # for t, (log_prob_i) in enumerate(policy_actions): 
+    #     advantage = (q_values[t] - v_thetas[t]).detach()
+    #     task_policy_loss.append(log_prob_i * advantage)
+
+    gammas_episode = [gamma**i for i in range(len(policy_actions))]
     for t, (log_prob_i) in enumerate(policy_actions): 
-        advantage = (q_values[t] - v_thetas[t]).detach()
-        task_policy_loss.append(log_prob_i * advantage)
+        dis_rwd = [g*rwd for g,rwd in zip(gammas_episode,reg_rewards[t:])]
+        task_policy_loss.append(log_prob_i * np.sum(dis_rwd))
 
     opt_policy.zero_grad()
 
@@ -193,9 +198,9 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     loss.backward(retain_graph=True)
 
     # gradient clipping
-    for param in policy.parameters():
-        if param.grad is not None:
-            param.grad.data.clamp_(-1, 1)
+    # for param in policy.parameters():
+    #     if param.grad is not None:
+    #         param.grad.data.clamp_(-1, 1)
 
     opt_policy.step()
 
@@ -238,6 +243,10 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
 
     loss =  -(torch.stack(task_specific_loss).sum() + (alpha/beta) * torch.stack(mismatch_loss).sum())
 
+    print(torch.stack(task_specific_loss).sum())
+    print(((alpha/beta) * torch.stack(mismatch_loss).sum())[0])
+    print(loss)
+
     loss.backward(retain_graph=True)
 
     # for param in distilled.parameters():
@@ -256,9 +265,8 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
         del distilled.pi_prob[ind][:]
 
 
-def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), GridworldEnv(4)], batch_size=128, gamma=0.95, alpha=0.8,
-            beta=5, num_episodes=200,
-            max_num_steps_per_episode=1000, learning_rate=0.001):
+def trainDistral( file_name="Distral_2col_AC", list_of_envs=[GridworldEnv(5), GridworldEnv(4)], batch_size=128, gamma=0.95, alpha=0.8,
+            beta=5, num_episodes=200, max_num_steps_per_episode=1000, learning_rate=0.001, verbose=True):
 
     # Specify Environment conditions
     input_size = list_of_envs[0].observation_space.shape[0]
@@ -309,7 +317,7 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
             episode_rewards[i_episode].append(total_reward) 
             episode_duration[i_episode].append(duration)
 
-            # get the value estimate of the final state according to equation 7 from distral paper
+            # get the value estimate of the final state according to equation 7 from Teh et al.
             next_state = torch.from_numpy(np.asarray(next_state)).float()
             Q_temp = models[i_env](next_state)
             pi_0_temp, _ = distilled(next_state)
@@ -318,18 +326,20 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
             if done:
                 final_state_value = 0
 
-            # Distill for each environment
+            # update task-specific policy
             task_specific_losses.append(task_specific_update(models[i_env], distilled,
                                                              optimizers[i_env], alpha,
                                                              beta, gamma, final_state_value,
                                                              i_env))
 
+        # update distilled policy
         finish_episode(task_specific_losses, models, distilled, opt_distilled, alpha, beta, gamma)
 
         # if i_episode % args.log_interval == 0:
-        for i in range(tasks):
-            print('Episode: {}\tEnv: {}\tDuration: {}\tTotal Reward: {:.2f}'.format(
-                i_episode, i, episode_duration[i_episode][i], episode_rewards[i_episode][i]))
+        if verbose:
+            for i in range(tasks):
+                print('Episode: {}\tEnv: {}\tDuration: {}\tTotal Reward: {:.2f}'.format(
+                    i_episode, i, episode_duration[i_episode][i], episode_rewards[i_episode][i]))
 
 
     np.save(file_name + '-distral0-rewards' , episode_rewards)
@@ -339,4 +349,4 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
 
 if __name__ == '__main__':
     # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
-    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.0001, num_episodes=200)
+    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200)
