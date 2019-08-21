@@ -113,7 +113,22 @@ This report primarily focuses on two approaches to multitask reinforcement learn
 
 In both frameworks, each algorithm serves as a prerequisite for subsequent one.
 
-% \section{Abstract}
+
+things I did to replicate the experiments from original work
+\begin{itemize}
+	\item replicated Distral 2 columns via SQL versus SQL across multiple tasks
+\end{itemize}
+things I did to extend experiments from original work
+\begin{itemize}
+	\item tested Distral 1 col via SQL versus SQL
+	\item tested Distral 2 col via SQL versus SQL
+	\item tested Distral 1 col via AC versus A3C
+	\item tested Distral 2 col via AC versus A3C
+	\item added back temperature coeff to Distral 1 col via SQL and via AC to compare to the original algo
+\end{itemize}
+
+
+
 
 \chapter{Literature Review}
 \section{Prelude}
@@ -365,7 +380,11 @@ Let $\pi_\theta = \pi$ to simplify notations, then the gradient w.r.t. the objec
 
 \subsection{Policy Gradient on Trajectories}
 
-Now consider instead of a one-step bandit scenario, we have an episodic environment that lasts over multiple steps. That is, each episode consists of a trajectory $\zeta = S_0, A_0, R_1, S_1, A_1, R_2, S_2 \cdots$ with return as $G(\zeta)$. Assume the discount factor $\gamma = 1$ for simplicity, then the policy gradient becomes
+Now consider instead of a one-step bandit scenario, we have an episodic environment that lasts over multiple steps. That is, each episode consists of a trajectory
+\begin{align}
+	\zeta = S_0, A_0, R_1, S_1, A_1, R_2, S_2 \cdots \nonumber
+\end{align}
+with return as $G(\zeta)$. Assume the discount factor $\gamma = 1$ for simplicity, then the policy gradient becomes
 \begin{align}
 \nabla_\theta J_\theta (\pi) &= \nabla_\theta \mathbb{E}[G(\zeta)]\nonumber\\
 &= \mathbb{E}[G(\zeta)\nabla_\theta \log P(\zeta)] \label{eq:policy-grad-traj}
@@ -850,6 +869,9 @@ Specifically, all neural networks will have the following architecture
 
 \textbf{INSERT DIAGRAM FOR NN}
 
+
+
+
 \chapter{Experimental Results and Extension on Original Work}
 \section{Gridworld Environment}
 
@@ -899,7 +921,7 @@ As shown above, the results matches the behaviour demonstrated in the original p
 
 \subsection{Distral 1 col vs SQL}
 
-Although the intended results are replicated through 10-step TD learning and setting the maximum number of episodes to 100, we should note that it is substantially more time consuming to conduct the experiments with such settings. Therefore, we will set $n=1$ instead of $n=10$ and maximum number of steps per episode to 1000 instead of 100. Given these new settings, we will also reduce the number of episodes from 1000 to 200 as one would expect the algorithms to converge quicker if the maximum number of steps per episode is increased by 10 folds. Below are the results of Distral 1 col via the SQL framework, versus SQL trained separately on each task.
+Although the results were replicated through 10-step TD learning and setting the maximum number of episodes to 100, we should note that it is substantially more time consuming to conduct the experiments with such settings. Therefore, we will set $n=1$ instead of $n=10$ and maximum number of steps per episode to 1000 instead of 100. Given these new settings, we will also reduce the number of episodes from 1000 to 200 as one would expect the algorithms to converge quicker if the maximum number of steps per episode is increased by 10 folds. Below are the results of Distral 1 col via the SQL framework, versus SQL trained separately on each task.
 
 \subsubsection{Environment 4 and 5}
 \begin{figure}[H]
@@ -1171,7 +1193,7 @@ As shown above, Distral 2 columns implemented via SQL is by far the most effecti
 whereas the task-specific policy in Distral 1 is simply softmax over the logits $f_{\theta_i}(a_t | s_t)$. This gives Distral 1 col a significant disadvantage as the rewards are defined in terms of both the task-specific and distilled policies. Furthermore, both the regularized rewards and the distilled policy are used to optimize the task-specific policy respectively in the SQL and regularized AC frameworks.
 
 
-
+\section{Distral 1 col vs Distral 1 col with $\beta$ coefficient}
 
 
 

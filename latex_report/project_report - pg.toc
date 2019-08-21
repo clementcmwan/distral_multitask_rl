@@ -13,8 +13,8 @@
 \contentsline {subsection}{\numberline {2.3.2}Policy Gradient on Trajectories}{18}% 
 \contentsline {subsection}{\numberline {2.3.3}Policy Gradient Theorem}{19}% 
 \contentsline {subsection}{\numberline {2.3.4}REINFORCE}{20}% 
-\contentsline {section}{\numberline {2.4}Advantage Actor Critic Model (A2C)}{20}% 
-\contentsline {subsection}{\numberline {2.4.1}Asynchronous Advantage Actor-Critic (A3C)}{23}% 
+\contentsline {section}{\numberline {2.4}Advantage Actor Critic Model (A2C)}{21}% 
+\contentsline {subsection}{\numberline {2.4.1}Asynchronous Advantage Actor-Critic (A3C)}{24}% 
 \contentsline {section}{\numberline {2.5}Maximum Entropy Reinforcement Learning}{24}% 
 \contentsline {subsection}{\numberline {2.5.1}Bandit setting}{24}% 
 \contentsline {subsection}{\numberline {2.5.2}Solving entropy-regularized bandit problem}{25}% 

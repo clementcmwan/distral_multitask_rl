@@ -128,6 +128,5 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
     return models, policy, episode_rewards, episode_durations
 
 if __name__ == '__main__':
-    # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001, max_num_steps_per_episode=100, num_episodes=1000)
-    # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001)
-    trainD(list_of_envs=[GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001)
+    trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001)
+    # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(7)], learning_rate=0.001)

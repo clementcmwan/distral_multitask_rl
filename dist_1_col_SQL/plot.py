@@ -20,18 +20,18 @@ smoothing_window = 20
 
 distral4_durations = np.load('Distral_1col-distral-2col-durations.npy')[0][:200]
 distral5_durations = np.load('Distral_1col-distral-2col-durations.npy')[1][:200]
-# distral6_durations = np.load('Distral_1col-distral-2col-durations.npy')[2][:200]
-# distral7_durations = np.load('Distral_1col-distral-2col-durations.npy')[3][:200]
-# distral8_durations = np.load('Distral_1col-distral-2col-durations.npy')[4][:200]
+distral6_durations = np.load('Distral_1col-distral-2col-durations.npy')[2][:200]
+distral7_durations = np.load('Distral_1col-distral-2col-durations.npy')[3][:200]
+distral8_durations = np.load('Distral_1col-distral-2col-durations.npy')[4][:200]
 
 # distral4_durations = np.asarray(distral4_durations)
 # distral4_durations[distral4_durations > 100] = 100
 
 distral4_smooth = pd.Series(distral4_durations).rolling(smoothing_window,min_periods=5).mean()
 distral5_smooth = pd.Series(distral5_durations).rolling(smoothing_window,min_periods=5).mean()
-# distral6_smooth = pd.Series(distral6_durations).rolling(smoothing_window,min_periods=5).mean()
-# distral7_smooth = pd.Series(distral7_durations).rolling(smoothing_window,min_periods=5).mean()
-# distral8_smooth = pd.Series(distral8_durations).rolling(smoothing_window,min_periods=5).mean()
+distral6_smooth = pd.Series(distral6_durations).rolling(smoothing_window,min_periods=5).mean()
+distral7_smooth = pd.Series(distral7_durations).rolling(smoothing_window,min_periods=5).mean()
+distral8_smooth = pd.Series(distral8_durations).rolling(smoothing_window,min_periods=5).mean()
 
 # distral_tot = (distral4_smooth+distral5_smooth+distral6_smooth+distral7_smooth+distral8_smooth)/5.
 
@@ -70,9 +70,9 @@ plt.ylabel('Duration', fontsize='16')
 
 plt.plot(distral4_smooth, label="Env 4 - Distral")
 plt.plot(distral5_smooth, label="Env 5 - Distral")
-# plt.plot(distral6_smooth, label="Env 7 - Distral")
-# plt.plot(distral7_smooth, label="Env 7 - Distral")
-# plt.plot(distral8_smooth, label="Env 8 - Distral")
+plt.plot(distral6_smooth, label="Env 6 - Distral")
+plt.plot(distral7_smooth, label="Env 7 - Distral")
+plt.plot(distral8_smooth, label="Env 8 - Distral")
 
 # plt.plot(dqn4_smooth, label="Env 4 - SQL")
 # plt.plot(dqn5_smooth, label="Env 5 - SQL")

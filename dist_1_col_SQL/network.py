@@ -161,8 +161,8 @@ def optimize_model(policy, model, optimizer, memory, batch_size,
     reward_batch = torch.cat(batch.reward)
 
     # calculate the numerator of equation 8
-    pi0_a_pref = policy.forward_action_pref(state_batch)
-    term = alpha*pi0_a_pref + beta*model(state_batch)
+    # pi0_a_pref = policy.forward_action_pref(state_batch)
+    term = model(state_batch)
     max_term = torch.max(term, 1)[0].unsqueeze(1)
 
     # get equation 8, pi_i(a_t | s_t)
@@ -193,12 +193,12 @@ def optimize_model(policy, model, optimizer, memory, batch_size,
     expected_state_action_values = (next_state_values.unsqueeze(1) * gamma) + reward_batch
 
     # Compute Huber loss
-    # loss = F.mse_loss(state_action_values, expected_state_action_values)
-    loss = F.smooth_l1_loss(state_action_values, expected_state_action_values)
+    loss = F.mse_loss(state_action_values, expected_state_action_values)
+    # loss = F.smooth_l1_loss(state_action_values, expected_state_action_values)
 
     # Optimize the model
     optimizer.zero_grad()
     loss.backward()
     for param in model.parameters():
-        param.grad.data.clamp_(-100, 100)
+        param.grad.data.clamp_(-500, 500)
     optimizer.step()

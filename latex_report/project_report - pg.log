@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.19)  20 AUG 2019 12:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.19)  20 AUG 2019 17:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -291,269 +291,263 @@ ucl_logo.png>]
 Chapter 1.
 [2
 
-] [3]
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 119.
+
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
+ [3]
 Chapter 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
  []
 
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 134--136
+Underfull \hbox (badness 10000) in paragraph at lines 149--151
 
  []
 
-<figs/agent-env.png, id=38, 429.605pt x 156.585pt>
+<figs/agent-env.png, id=39, 429.605pt x 156.585pt>
 File: figs/agent-env.png Graphic file (type png)
 <use figs/agent-env.png>
-Package pdftex.def Info: figs/agent-env.png  used on input line 140.
+Package pdftex.def Info: figs/agent-env.png  used on input line 155.
 (pdftex.def)             Requested size: 368.57838pt x 134.34268pt.
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 147--149
+Underfull \hbox (badness 10000) in paragraph at lines 162--164
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 161.
-
-(/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 161.
- [6 <./figs/agent-env.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 169--171
-
- []
-
-[7]
+[6 <./figs/agent-env.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 184--186
 
  []
 
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 199--201
+
+ []
+
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 213--214
+Underfull \hbox (badness 10000) in paragraph at lines 228--229
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 221--223
+Underfull \hbox (badness 10000) in paragraph at lines 236--238
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 235--237
+Underfull \hbox (badness 10000) in paragraph at lines 250--252
 
  []
 
 <figs/policy-eval.png, id=65, 755.82375pt x 255.95625pt>
 File: figs/policy-eval.png Graphic file (type png)
 <use figs/policy-eval.png>
-Package pdftex.def Info: figs/policy-eval.png  used on input line 248.
+Package pdftex.def Info: figs/policy-eval.png  used on input line 263.
 (pdftex.def)             Requested size: 368.57838pt x 124.81819pt.
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 251--252
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
 
  []
 
 <figs/policy-iter.png, id=69, 320.19624pt x 191.71625pt>
 File: figs/policy-iter.png Graphic file (type png)
 <use figs/policy-iter.png>
-Package pdftex.def Info: figs/policy-iter.png  used on input line 256.
+Package pdftex.def Info: figs/policy-iter.png  used on input line 271.
 (pdftex.def)             Requested size: 207.32315pt x 124.13432pt.
 <figs/policy-iter-code.png, id=70, 755.82375pt x 453.695pt>
 File: figs/policy-iter-code.png Graphic file (type png)
 <use figs/policy-iter-code.png>
-Package pdftex.def Info: figs/policy-iter-code.png  used on input line 263.
+Package pdftex.def Info: figs/policy-iter-code.png  used on input line 278.
 (pdftex.def)             Requested size: 368.57838pt x 221.24638pt.
 [11 <./figs/policy-eval.png> <./figs/policy-iter.png>] [12 <./figs/policy-iter-
 code.png>]
 <figs/q_learning.png, id=80, 1103.12125pt x 330.23375pt>
 File: figs/q_learning.png Graphic file (type png)
 <use figs/q_learning.png>
-Package pdftex.def Info: figs/q_learning.png  used on input line 298.
+Package pdftex.def Info: figs/q_learning.png  used on input line 313.
 (pdftex.def)             Requested size: 414.6463pt x 124.1296pt.
  [13]
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
 <figs/DQN_pseudocode.png, id=84, 1210.5225pt x 967.615pt>
 File: figs/DQN_pseudocode.png Graphic file (type png)
 <use figs/DQN_pseudocode.png>
-Package pdftex.def Info: figs/DQN_pseudocode.png  used on input line 310.
+Package pdftex.def Info: figs/DQN_pseudocode.png  used on input line 325.
 (pdftex.def)             Requested size: 322.50345pt x 257.78986pt.
 [14 <./figs/q_learning.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 316--317
+Underfull \hbox (badness 10000) in paragraph at lines 331--332
 
  []
 
 <figs/sonic_mania.jpg, id=89, 451.6875pt x 253.69781pt>
 File: figs/sonic_mania.jpg Graphic file (type jpg)
 <use figs/sonic_mania.jpg>
-Package pdftex.def Info: figs/sonic_mania.jpg  used on input line 321.
+Package pdftex.def Info: figs/sonic_mania.jpg  used on input line 336.
 (pdftex.def)             Requested size: 138.21777pt x 77.63127pt.
 [15 <./figs/DQN_pseudocode.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 327--328
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--334
+Underfull \hbox (badness 10000) in paragraph at lines 347--349
 
  []
 
 <figs/alias_world.png, id=94, 148.555pt x 102.3825pt>
 File: figs/alias_world.png Graphic file (type png)
 <use figs/alias_world.png>
-Package pdftex.def Info: figs/alias_world.png  used on input line 338.
+Package pdftex.def Info: figs/alias_world.png  used on input line 353.
 (pdftex.def)             Requested size: 138.21777pt x 95.26317pt.
 [16 <./figs/sonic_mania.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 354--356
+Underfull \hbox (badness 10000) in paragraph at lines 369--371
 
  []
 
-[17 <./figs/alias_world.png>]
-Overfull \hbox (52.41591pt too wide) in paragraph at lines 368--369
-\OT1/cmr/m/n/12 lasts over mul-ti-ple steps. That is, each episode con-sists of
- a tra-jec-tory $\OML/cmm/m/it/12 ^^P \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 S[]; A
-[]; R[]; S[]; A[]; R[]; S[] [] $
- []
-
-[18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 409--411
+[17 <./figs/alias_world.png>] [18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 428--430
 
  []
 
 <figs/REINFORCE.png, id=109, 759.83875pt x 216.81pt>
 File: figs/REINFORCE.png Graphic file (type png)
 <use figs/REINFORCE.png>
-Package pdftex.def Info: figs/REINFORCE.png  used on input line 415.
+Package pdftex.def Info: figs/REINFORCE.png  used on input line 434.
 (pdftex.def)             Requested size: 414.6463pt x 118.31624pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--421
+Underfull \hbox (badness 10000) in paragraph at lines 439--440
 
  []
 
 [20 <./figs/REINFORCE.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 426--428
-
- []
-
-[21]
 Underfull \hbox (badness 10000) in paragraph at lines 445--447
 
  []
 
-<figs/A2C.png, id=118, 773.89125pt x 403.5075pt>
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 464--466
+
+ []
+
+[22]
+<figs/A2C.png, id=121, 773.89125pt x 403.5075pt>
 File: figs/A2C.png Graphic file (type png)
 <use figs/A2C.png>
-Package pdftex.def Info: figs/A2C.png  used on input line 467.
+Package pdftex.def Info: figs/A2C.png  used on input line 486.
 (pdftex.def)             Requested size: 460.72124pt x 240.22232pt.
-[22]
 <figs/A3C.png, id=122, 733.74126pt x 435.6275pt>
 File: figs/A3C.png Graphic file (type png)
 <use figs/A3C.png>
-Package pdftex.def Info: figs/A3C.png  used on input line 476.
+Package pdftex.def Info: figs/A3C.png  used on input line 495.
 (pdftex.def)             Requested size: 414.6463pt x 246.18317pt.
  [23 <./figs/A2C.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 482--483
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
 
  []
 
 [24 <./figs/A3C.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 516--517
+Underfull \hbox (badness 10000) in paragraph at lines 535--536
 
  []
 
 [25] [26] [27] [28]
-Underfull \hbox (badness 10000) in paragraph at lines 629--631
+Underfull \hbox (badness 10000) in paragraph at lines 648--650
 
  []
 
 [29]
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+Underfull \hbox (badness 10000) in paragraph at lines 668--669
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 651--652
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
 
  []
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 653--654
+Underfull \hbox (badness 10000) in paragraph at lines 672--673
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 655--656
+Underfull \hbox (badness 10000) in paragraph at lines 674--675
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 657--658
+Underfull \hbox (badness 10000) in paragraph at lines 676--677
 
  []
 
 [31]
-Underfull \hbox (badness 10000) in paragraph at lines 670--672
+Underfull \hbox (badness 10000) in paragraph at lines 689--691
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 673--674
+Underfull \hbox (badness 10000) in paragraph at lines 692--693
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 679--681
+Underfull \hbox (badness 10000) in paragraph at lines 698--700
 
  []
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 691--693
+Underfull \hbox (badness 10000) in paragraph at lines 710--712
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 700--701
+Underfull \hbox (badness 10000) in paragraph at lines 719--720
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 702--703
+Underfull \hbox (badness 10000) in paragraph at lines 721--722
 
  []
 
 [33] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 760--761
+Underfull \hbox (badness 10000) in paragraph at lines 779--780
 
  []
 
 [35]
-Underfull \hbox (badness 10000) in paragraph at lines 765--767
+Underfull \hbox (badness 10000) in paragraph at lines 784--786
 
  []
 
 [36] [37]
-Underfull \hbox (badness 10000) in paragraph at lines 847--848
+Underfull \hbox (badness 10000) in paragraph at lines 866--867
 
  []
 
@@ -562,10 +556,10 @@ Chapter 3.
 <figs/grid4.png, id=182, 262.9825pt x 252.945pt>
 File: figs/grid4.png Graphic file (type png)
 <use figs/grid4.png>
-Package pdftex.def Info: figs/grid4.png  used on input line 859.
+Package pdftex.def Info: figs/grid4.png  used on input line 881.
 (pdftex.def)             Requested size: 138.21777pt x 132.94864pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 863--864
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
 
  []
 
@@ -575,10 +569,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 863--864
 <figs/Distral_paper_res.png, id=187, 454.69875pt x 385.44pt>
 File: figs/Distral_paper_res.png Graphic file (type png)
 <use figs/Distral_paper_res.png>
-Package pdftex.def Info: figs/Distral_paper_res.png  used on input line 880.
+Package pdftex.def Info: figs/Distral_paper_res.png  used on input line 902.
 (pdftex.def)             Requested size: 230.36061pt x 195.27202pt.
  [41]
-Underfull \hbox (badness 10000) in paragraph at lines 883--884
+Underfull \hbox (badness 10000) in paragraph at lines 905--906
 
  []
 
@@ -586,13 +580,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 883--884
 File: figs/distral_2_col_SQL_avg_rwd.png Graphic file (type png)
 <use figs/distral_2_col_SQL_avg_rwd.png>
 Package pdftex.def Info: figs/distral_2_col_SQL_avg_rwd.png  used on input line
- 890.
+ 912.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/distral_2_col_SQL_avg_dur.png, id=192, 722.7pt x 361.35pt>
 File: figs/distral_2_col_SQL_avg_dur.png Graphic file (type png)
 <use figs/distral_2_col_SQL_avg_dur.png>
 Package pdftex.def Info: figs/distral_2_col_SQL_avg_dur.png  used on input line
- 895.
+ 917.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 [42 <./figs/Distral_paper_res.png> <./figs/distral_2_col_SQL_avg_rwd.png> <./fi
 gs/distral_2_col_SQL_avg_dur.png>]
@@ -600,37 +594,37 @@ gs/distral_2_col_SQL_avg_dur.png>]
 File: figs/d1_col_sql/d1_col_sql_4_5_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_rwd.png  used on input 
-line 909.
+line 931.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_4_5_dur.png, id=200, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_dur.png  used on input 
-line 914.
+line 936.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_7_8_rwd.png, id=201, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_7_8_rwd.png  used on input 
-line 924.
+line 946.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_7_8_dur.png, id=202, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_7_8_dur.png  used on input 
-line 929.
+line 951.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png, id=203, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png  used on inpu
-t line 939.
+t line 961.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_4_5_7_dur.png, id=204, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_7_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_7_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_7_dur.png  used on inpu
-t line 944.
+t line 966.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [43 <./figs/d1_col_sql/d1_col_sql_4_5_rwd.png> <./figs/d1_col_sql/d1_col_sql_4
 _5_dur.png> <./figs/d1_col_sql/d1_col_sql_7_8_rwd.png> <./figs/d1_col_sql/d1_co
@@ -639,25 +633,25 @@ l_sql_7_8_dur.png>]
 File: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png  used on 
-input line 954.
+input line 976.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png, id=213, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png  used on 
-input line 959.
+input line 981.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_sql/d2_col_sql_4_5_rwd.png, id=214, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_rwd.png  used on input 
-line 972.
+line 994.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_sql/d2_col_sql_4_5_dur.png, id=215, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_dur.png  used on input 
-line 977.
+line 999.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [44 <./figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png> <./figs/d1_col_sql/d1_col_sql
 _4_5_7_dur.png> <./figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png> <./figs/d1_col
@@ -666,25 +660,25 @@ _sql/d1_col_sql_4_5_6_7_8_dur.png>]
 File: figs/d2_col_sql/d2_col_sql_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_7_8_rwd.png  used on input 
-line 986.
+line 1008.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_sql/d2_col_sql_7_8_dur.png, id=224, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_7_8_dur.png  used on input 
-line 991.
+line 1013.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png, id=225, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png  used on inpu
-t line 1001.
+t line 1023.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_sql/d2_col_sql_4_5_7_dur.png, id=226, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_7_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_7_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_7_dur.png  used on inpu
-t line 1006.
+t line 1028.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [45 <./figs/d2_col_sql/d2_col_sql_4_5_rwd.png> <./figs/d2_col_sql/d2_col_sql_4
 _5_dur.png> <./figs/d2_col_sql/d2_col_sql_7_8_rwd.png> <./figs/d2_col_sql/d2_co
@@ -694,25 +688,25 @@ sql/d2_col_sql_4_5_7_dur.png>]
 File: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png  used on 
-input line 1016.
+input line 1038.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png, id=238, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png  used on 
-input line 1021.
+input line 1043.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_4_5_rwd.png, id=239, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_rwd.png  used on input li
-ne 1036.
+ne 1058.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_4_5_dur.png, id=240, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_dur.png  used on input li
-ne 1041.
+ne 1063.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [46 <./figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png> <./figs/d2_col_sql/d2_col
 _sql_4_5_6_7_8_dur.png> <./figs/d1_col_ac/d1_col_ac_4_5_rwd.png> <./figs/d1_col
@@ -721,37 +715,37 @@ _ac/d1_col_ac_4_5_dur.png>]
 File: figs/d1_col_ac/d1_col_ac_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_7_8_rwd.png  used on input li
-ne 1051.
+ne 1073.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_7_8_dur.png, id=250, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_7_8_dur.png  used on input li
-ne 1056.
+ne 1078.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png, id=251, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png  used on input 
-line 1065.
+line 1087.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_4_5_7_dur.png, id=252, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_7_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_7_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_7_dur.png  used on input 
-line 1070.
+line 1092.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png, id=253, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png  used on in
-put line 1080.
+put line 1102.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png, id=254, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png  used on in
-put line 1085.
+put line 1107.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [47 <./figs/d1_col_ac/d1_col_ac_7_8_rwd.png> <./figs/d1_col_ac/d1_col_ac_7_8_d
 ur.png> <./figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png> <./figs/d1_col_ac/d1_col_ac_
@@ -761,37 +755,37 @@ ur.png> <./figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png> <./figs/d1_col_ac/d1_col_ac_
 File: figs/d2_col_ac/d2_col_ac_4_5_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_rwd.png  used on input li
-ne 1096.
+ne 1118.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_ac/d2_col_ac_4_5_dur.png, id=265, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_dur.png  used on input li
-ne 1101.
+ne 1123.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_ac/d2_col_ac_7_8_rwd.png, id=266, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_7_8_rwd.png  used on input li
-ne 1111.
+ne 1133.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_ac/d2_col_ac_7_8_dur.png, id=267, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_7_8_dur.png  used on input li
-ne 1116.
+ne 1138.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png, id=268, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png  used on input 
-line 1126.
+line 1148.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_ac/d2_col_ac_4_5_7_dur.png, id=269, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_7_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_7_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_7_dur.png  used on input 
-line 1131.
+line 1153.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [48 <./figs/d2_col_ac/d2_col_ac_4_5_rwd.png> <./figs/d2_col_ac/d2_col_ac_4_5_d
 ur.png> <./figs/d2_col_ac/d2_col_ac_7_8_rwd.png> <./figs/d2_col_ac/d2_col_ac_7_
@@ -800,23 +794,23 @@ ur.png> <./figs/d2_col_ac/d2_col_ac_7_8_rwd.png> <./figs/d2_col_ac/d2_col_ac_7_
 File: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png  used on in
-put line 1140.
+put line 1162.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png, id=278, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png  used on in
-put line 1145.
+put line 1167.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/all_algos_rwd.png, id=279, 722.7pt x 361.35pt>
 File: figs/all_algos_rwd.png Graphic file (type png)
 <use figs/all_algos_rwd.png>
-Package pdftex.def Info: figs/all_algos_rwd.png  used on input line 1158.
+Package pdftex.def Info: figs/all_algos_rwd.png  used on input line 1180.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/all_algos_dur.png, id=280, 722.7pt x 361.35pt>
 File: figs/all_algos_dur.png Graphic file (type png)
 <use figs/all_algos_dur.png>
-Package pdftex.def Info: figs/all_algos_dur.png  used on input line 1163.
+Package pdftex.def Info: figs/all_algos_dur.png  used on input line 1185.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
  [49 <./figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png> <./figs/d2_col_ac/d2_col_ac_4_5
 _7_dur.png> <./figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png> <./figs/d2_col_ac/d2
@@ -824,17 +818,17 @@ _col_ac_4_5_6_7_8_dur.png> <./figs/all_algos_rwd.png> <./figs/all_algos_dur.png
 >] [50]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1185--1186
+Underfull \hbox (badness 10000) in paragraph at lines 1207--1208
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1187--1188
+Underfull \hbox (badness 10000) in paragraph at lines 1209--1210
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1189--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1211--1212
 
  []
 
@@ -847,22 +841,26 @@ Appendix A.
 <figs/GridWorlds.png, id=309, 754.82pt x 407.5225pt>
 File: figs/GridWorlds.png Graphic file (type png)
 <use figs/GridWorlds.png>
-Package pdftex.def Info: figs/GridWorlds.png  used on input line 1203.
+Package pdftex.def Info: figs/GridWorlds.png  used on input line 1225.
 (pdftex.def)             Requested size: 322.50345pt x 174.11818pt.
 <figs/distral1_2_diagram.png, id=310, 289.08pt x 229.85875pt>
 File: figs/distral1_2_diagram.png Graphic file (type png)
 <use figs/distral1_2_diagram.png>
-Package pdftex.def Info: figs/distral1_2_diagram.png  used on input line 1209.
+Package pdftex.def Info: figs/distral1_2_diagram.png  used on input line 1231.
 (pdftex.def)             Requested size: 207.32315pt x 164.84929pt.
 <figs/SAC.png, id=311, 581.17125pt x 732.7375pt>
 File: figs/SAC.png Graphic file (type png)
 <use figs/SAC.png>
-Package pdftex.def Info: figs/SAC.png  used on input line 1215.
+Package pdftex.def Info: figs/SAC.png  used on input line 1237.
 (pdftex.def)             Requested size: 391.61586pt x 493.74911pt.
 [56
 
  <./figs/GridWorlds.png>] [57 <./figs/distral1_2_diagram.png>] [58 <./figs/SAC.
-png>] (./project_report - pg.aux) ) 
+png>] (./project_report - pg.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  3564 strings out of 492616
  54382 string characters out of 6129481
@@ -871,28 +869,27 @@ Here is how much of TeX's memory you used:
  16874 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,17n,27p,944b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2019/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.p
-fb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pf
-b></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
-0.pfb>
-Output written on "project_report - pg.pdf" (62 pages, 7508240 bytes).
+</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
+ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
+al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
+/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/t
+exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/tex
+live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
+e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
+019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2019/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2019/texmf-
+dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on "project_report - pg.pdf" (62 pages, 7508892 bytes).
 PDF statistics:
  390 PDF objects out of 1000 (max. 8388607)
  200 compressed objects within 2 object streams
