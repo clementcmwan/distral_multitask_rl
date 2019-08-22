@@ -896,7 +896,7 @@ In this section we will compare the performance of Distral 1 col versus SQL and 
 
 \subsection{Reproducing results from original work}
 
-In the original work, Distral 2 cols via SQL was tested with $\alpha = 0$. That is, only the KL divergence penalty was included in the rewards. In addition, each SQL iteration uses a 10 step TD learning. The average rewards across tasks were then plotted as shown below
+In the original work, Distral 2 cols via SQL was tested with $\alpha = 1$. That is, only the KL divergence penalty was included in the rewards. In addition, each SQL iteration uses a 10 step TD learning. The average rewards across tasks were then plotted as shown below
 \begin{figure}[H]
     \center
     \includegraphics[width=0.5\linewidth]{figs/Distral_paper_res.png}
@@ -919,9 +919,10 @@ This result is compared to this report's replication of the experiment
 \end{figure}
 As shown above, the results matches the behaviour demonstrated in the original paper. Distral 2 col via SQL learns significantly faster and has lower averaged duration and higher rewards across 5 tasks in the 2-corridor environment. Note that performance may vary depending on the architecture of the neural networks used in to approximate policies, state and action value estimates.
 
+\section{Extended Experiments}
 \subsection{Distral 1 col vs SQL}
 
-Although the results were replicated through 10-step TD learning and setting the maximum number of episodes to 100, we should note that it is substantially more time consuming to conduct the experiments with such settings. Therefore, we will set $n=1$ instead of $n=10$ and maximum number of steps per episode to 1000 instead of 100. Given these new settings, we will also reduce the number of episodes from 1000 to 200 as one would expect the algorithms to converge quicker if the maximum number of steps per episode is increased by 10 folds. Below are the results of Distral 1 col via the SQL framework, versus SQL trained separately on each task.
+Although the results were replicated through 10-step TD learning and setting the maximum number of episodes to 100, we should note that it is substantially more time consuming to conduct the experiments with such settings. Therefore, we will set $n=1$ instead of $n=10$ and maximum number of steps per episode to 1000 instead of 100. Given these new settings, we will also reduce the number of episodes from 1000 to 200 as one would expect the algorithms to converge quicker if the maximum number of steps per episode is increased by 10 folds. Further, we will also set $\alpha = 0.8$ in order for $\pi_0$ to act as a soft prior on $\pi_i$. Finally, we will also set $\beta = 5$ to match the setting as mentioned in the original work \cite{teh2017distral}. Below are the results of Distral 1 col via the SQL framework, versus SQL trained separately on each task.
 
 \subsubsection{Environment 4 and 5}
 \begin{figure}[H]
@@ -1186,16 +1187,78 @@ To assess the overall performance of all Distral algorithms across different arc
 \end{minipage}%
 \end{figure}
 
-As shown above, Distral 2 columns implemented via SQL is by far the most effective algorithm comparing to other variants. Several reasons can be considered in order to explain this phenomenon. First, the difference in performance between Distral 1 col and Distral 1 col in both frameworks is likely due to the fact that the architecture of Distral 2 col defines task-specific policy in terms of the distilled policy. Specifically, recall that the task-specific policy defined in Distral 2 col is 
+As shown above, Distral 2 columns implemented via SQL is by far the most effective algorithm comparing to other variants. Several reasons can be considered in order to explain this phenomenon. One possible explanation for the difference in performance between Distral 1 col and Distral 1 col in both frameworks is likely due to the fact that the architecture of Distral 2 col defines task-specific policy in terms of the distilled policy. First, recall that the task-specific policy defined in Distral 2 col is 
 \begin{align}
 \hat{\pi}_i(a_t|s_t) &= \frac{\exp(\alpha h_{\theta_0}(a_t| s_t) + \beta f_{\theta_i}(a_t | s_t))}{\sum_{a^\prime}\exp(\alpha h_{\theta_0}(a^\prime_t | s_t) + \beta f_{\theta_i}(a^\prime _t | s_t))} \nonumber
 \end{align}
-whereas the task-specific policy in Distral 1 is simply softmax over the logits $f_{\theta_i}(a_t | s_t)$. This gives Distral 1 col a significant disadvantage as the rewards are defined in terms of both the task-specific and distilled policies. Furthermore, both the regularized rewards and the distilled policy are used to optimize the task-specific policy respectively in the SQL and regularized AC frameworks.
+whereas the task-specific policy in Distral 1 is simply softmax over $f_{\theta_i}(a_t | s_t)$, which gives Distral 1 col a significant disadvantage. Specifically, we can interpret the softmax over $f_{\theta_i}$ in terms of an Ising model, which is typically defined as
+\begin{align}
+P(x|\beta) &= \frac{1}{Z(\beta)}\exp[\beta \cdot (-E(x))] \label{eq:gibbs-dist}
+\end{align}
+, where the LHS is interpreted as the probability of an atom at state $x$ given the inverse temperature $\beta$, $Z$ is the normaliser and $E(x)$ as the energy of the atom. $\beta$ is known as the inverse temperature because it can be rewritten as $\beta = \frac{1}{k_B T}$, where $k_B$ is the Boltzmann constant and $T$ is the temperature of the model.\\
+
+Interpreting the task-specific policy for Distral 1 col under the lens of an Ising model means the inverse temperature $\beta$ is at 1
+\begin{align}
+\hat{\pi}_i(a_t|s_t) &= \frac{\exp(\beta f_{\theta_i}(a_t | s_t))}{\sum_{a^\prime}\exp(\beta f_{\theta_i}(a^\prime _t | s_t))}
+=\frac{\exp(f_{\theta_i}(a_t | s_t))}{\sum_{a^\prime}\exp(f_{\theta_i}(a^\prime _t | s_t))} \nonumber
+\end{align}
+Whereas, the coefficients for Distral 2 col are $\alpha = 0.8$ and $\beta = 5$. This serves as an explanation to why Distral 1 col performed substantially worse than Distral 2 col. Specifically, we know from information theory and statistical mechanics \cite{mackay2003information} that as $\beta$ decreases or $T$ increases, the magnitude of $\exp[\beta \cdot (-E(x))]=\exp(\beta f_{\theta_i}(a_t | s_t))$ becomes roughly equal across all states and vice versa for large $\beta$ or small $T$. This implies that setting $\beta = 1$ for Distral 1 col makes the task-specific probabilities all similar, which negatively disrupts the algorithm's efforts in solving the tasks at hand.\\
+
+This can be verified empirically by comparing the performance of Distral 1 col via SQL on environments 4 and 5 for different settings of $\beta$ during the agent's decision making process. Specifically, let $\beta^\prime$ be a new coefficient dedicated exclusively for $\pi_i(a_t|s_t)$ during action selection, whilst keeping the original $\beta$ fixed at 5 in all other equations. Also, let this new algorithm variant be ``Distral 1 col beta via SQL".
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figs/betas/d1_SQL_1_to_5_b_avg_dur.png}
+\end{minipage}%
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figs/betas/d1_SQL_5_to_8_b_avg_dur.png}
+\end{minipage}%
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figs/betas/d1_SQL_8_to_10_b_avg_dur.png}
+\end{minipage}%
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figs/betas/d1_SQL_large_b_avg_dur.png}
+\end{minipage}%
+\end{figure}
+As we can see on the top-left figure, the effects of adjusting $\beta^\prime$ from 1 to 5 is very apparent. We can also see that the average duration at $\beta^\prime = 4$ decreases faster than $\beta^\prime = 5$ initially, but at around episode 60 setting $\beta^\prime = 5$ results in lower average duration across tasks. Similar observation can be made on the top-right figure, where Distral 1 col's performance continued to improve as $\beta^\prime$ is increased from 5 to 8. However, we can also see on the bottom-left figure that increasing $\beta^\prime$ from 8 to 10 only provided minor improvements on the algorithm's performance. A similar argument can be made for the bottom-right figure, where $\beta^\prime=10,50,100$ is compared. Thus, we can conclude that a large enough $\beta^\prime$ (i.e. from 5 to 8) will allow the algorithm to make decisive choices instead of sampling from a uniform-like distribution.\\
+
+We should also note that aside from approaching the effects of $\beta^\prime$ from the information theory's point of view, the original work \cite{teh2017distral} also mentioned that as $\beta^\prime \rightarrow \infty$, the soft-Bellman updates as stated in equation (\ref{eq:SQL-v-est}) hardens to a \texttt{max} operator. The same behaviour applies to the task-specific policy $\pi_i(a_t|s_t)$, such that multiplying a large enough coefficient to $f_{\theta_i}$ results in a one-hot like distribution across actions. This also implies that for a very large $\beta^\prime$, the algorithm may not converge because of acting greedy too early.\\
+
+Conversely, if we fix $\beta^\prime = 5$ and set $\beta = 3$, we discover that Distral 1 col diverges. This is likely due to the fact \textbf{NEED TO EXPLAIN WHY IT DIVERGES..}
+
+\subsection{Comparing Distral 1 col beta vs Distral 2 col under SQL}
+
+Given the the discovery of the importance of multiplying the $\beta^\prime$ coefficient in 
 
 
-\section{Distral 1 col vs Distral 1 col with $\beta$ coefficient}
+% Specifically, the rewards are defined in terms of both the task-specific and distilled policies, which is then used to optimize the distilled policy. This means commonalities across tasks are condensed into the distilled policy, but is never accessed during action selection for Distral 1 col. This can be empirically demonstrated by comparing the average magnitude of the task-specific and distilled policies' logits, $f_{\theta_i}$ and $h_{\theta_0}$ as shown below
+% \begin{figure}[H]
+% \centering
+% \begin{minipage}{.5\textwidth}
+% \centering
+% \includegraphics[width=\textwidth]{figs/magnitude_comparison/dist_sql_4_5_mag4.png}
+% \end{minipage}%
+% \centering
+% \begin{minipage}{.5\textwidth}
+% \centering
+% \includegraphics[width=\textwidth]{figs/magnitude_comparison/dist_sql_4_5_mag5.png}
+% \end{minipage}%
+% \end{figure}
+% The figures above show the norm of $f_{\theta_i}$ and $h_{\theta_0}$ for both Distral algorithms trained on environments 4 and 5 simultaneously. We see that for both Distral algorithms, the average magnitude of the distilled policy's logits $h_{\theta_0}$ becomes similar as the number of episodes increases. Whereas, the norm of task-specific logits $f_{\theta_i}$ tends towards 0.5 as the number of episodes increases. This indicates that the distilled policy is mostly responsible for each algorithm's performance. As a result, we can see that the predominant reason for Distral 1 col's poor behaviour is likely due to the fact that distilled policy's logits were not involved in the decision making process.\\
+
+\textbf{NEED TO EXPLAIN WHY AC FRAMEWORK SUCKS}
 
 
+% \section{Distral 1 col vs Distral 1 col with $\beta$ coefficient}
 
 
 
@@ -1210,7 +1273,9 @@ can integrate the Distral algorithms with SAC instead of regularized policy grad
 
 can scale up experiments and train on deepmind lab\\
 
-in all the other experiments done by deepmind in the depmind lab, Distral 2 col consistently outperform Distral 1 col, so don't know why we need distral 1 col in the first place?
+in all the other experiments done by deepmind in the depmind lab, Distral 2 col consistently outperform Distral 1 col, so don't know why we need distral 1 col in the first place?\\
+
+can find an alternative way to circumvent the requirement of same action and state space across tasks so the algorithms can be more generalized.
 
 \appendix
 

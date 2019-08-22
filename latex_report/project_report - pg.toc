@@ -33,27 +33,30 @@
 \contentsline {section}{\numberline {3.1}Gridworld Environment}{40}% 
 \contentsline {section}{\numberline {3.2}Experiments under SQL framework}{41}% 
 \contentsline {subsection}{\numberline {3.2.1}Reproducing results from original work}{41}% 
-\contentsline {subsection}{\numberline {3.2.2}Distral 1 col vs SQL}{43}% 
+\contentsline {section}{\numberline {3.3}Extended Experiments}{43}% 
+\contentsline {subsection}{\numberline {3.3.1}Distral 1 col vs SQL}{43}% 
 \contentsline {subsubsection}{Environment 4 and 5}{43}% 
-\contentsline {subsubsection}{Environment 7 and 8}{43}% 
+\contentsline {subsubsection}{Environment 7 and 8}{44}% 
 \contentsline {subsubsection}{Environments 4, 5 and 7}{44}% 
-\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{44}% 
-\contentsline {subsection}{\numberline {3.2.3}Distral 2 col vs SQL}{44}% 
+\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{45}% 
+\contentsline {subsection}{\numberline {3.3.2}Distral 2 col vs SQL}{45}% 
 \contentsline {subsubsection}{Environment 4 and 5}{45}% 
-\contentsline {subsubsection}{Environment 7 and 8}{45}% 
-\contentsline {subsubsection}{Environments 4, 5 and 7}{45}% 
+\contentsline {subsubsection}{Environment 7 and 8}{46}% 
+\contentsline {subsubsection}{Environments 4, 5 and 7}{46}% 
 \contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{46}% 
-\contentsline {section}{\numberline {3.3}Experiments under regularized AC framework}{46}% 
-\contentsline {subsection}{\numberline {3.3.1}Distral 1 col vs A3C}{46}% 
-\contentsline {subsubsection}{Environment 4 and 5}{46}% 
+\contentsline {section}{\numberline {3.4}Experiments under regularized AC framework}{47}% 
+\contentsline {subsection}{\numberline {3.4.1}Distral 1 col vs A3C}{47}% 
+\contentsline {subsubsection}{Environment 4 and 5}{47}% 
 \contentsline {subsubsection}{Environment 7 and 8}{47}% 
-\contentsline {subsubsection}{Environments 4, 5 and 7}{47}% 
-\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{47}% 
-\contentsline {subsection}{\numberline {3.3.2}Distral 2 col vs A3C}{48}% 
-\contentsline {subsubsection}{Environment 4 and 5}{48}% 
-\contentsline {subsubsection}{Environment 7 and 8}{48}% 
-\contentsline {subsubsection}{Environments 4, 5 and 7}{49}% 
-\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{49}% 
-\contentsline {section}{\numberline {3.4}Distral 1 col vs Distral 2 col}{49}% 
-\contentsline {chapter}{\numberline {4}Conclusion and Suggestions on Further Work}{51}% 
-\contentsline {chapter}{\numberline {A}Figures, tables and pseudocode}{56}% 
+\contentsline {subsubsection}{Environments 4, 5 and 7}{48}% 
+\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{48}% 
+\contentsline {subsection}{\numberline {3.4.2}Distral 2 col vs A3C}{49}% 
+\contentsline {subsubsection}{Environment 4 and 5}{49}% 
+\contentsline {subsubsection}{Environment 7 and 8}{49}% 
+\contentsline {subsubsection}{Environments 4, 5 and 7}{50}% 
+\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{50}% 
+\contentsline {section}{\numberline {3.5}Distral 1 col vs Distral 2 col}{50}% 
+\contentsline {subsection}{\numberline {3.5.1}Comparing Distral 1 col beta vs Distral 2 col under SQL}{53}% 
+\contentsline {section}{\numberline {3.6}Distral 1 col vs Distral 1 col with $\beta $ coefficient}{53}% 
+\contentsline {chapter}{\numberline {4}Conclusion and Suggestions on Further Work}{54}% 
+\contentsline {chapter}{\numberline {A}Figures, tables and pseudocode}{59}% 

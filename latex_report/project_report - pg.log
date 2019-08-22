@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.19)  20 AUG 2019 17:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.19)  22 AUG 2019 18:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -318,7 +318,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 149--151
 
  []
 
-<figs/agent-env.png, id=39, 429.605pt x 156.585pt>
+<figs/agent-env.png, id=40, 429.605pt x 156.585pt>
 File: figs/agent-env.png Graphic file (type png)
 <use figs/agent-env.png>
 Package pdftex.def Info: figs/agent-env.png  used on input line 155.
@@ -594,305 +594,355 @@ gs/distral_2_col_SQL_avg_dur.png>]
 File: figs/d1_col_sql/d1_col_sql_4_5_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_rwd.png  used on input 
-line 931.
+line 932.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_4_5_dur.png, id=200, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_dur.png  used on input 
-line 936.
+line 937.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_7_8_rwd.png, id=201, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_7_8_rwd.png  used on input 
-line 946.
+line 947.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
 <figs/d1_col_sql/d1_col_sql_7_8_dur.png, id=202, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_7_8_dur.png  used on input 
-line 951.
+line 952.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png, id=203, 722.7pt x 361.35pt>
+ [43 <./figs/d1_col_sql/d1_col_sql_4_5_rwd.png> <./figs/d1_col_sql/d1_col_sql_4
+_5_dur.png>]
+<figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png, id=208, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png  used on inpu
-t line 961.
+t line 962.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_sql/d1_col_sql_4_5_7_dur.png, id=204, 722.7pt x 361.35pt>
+<figs/d1_col_sql/d1_col_sql_4_5_7_dur.png, id=209, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_7_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_7_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_7_dur.png  used on inpu
-t line 966.
+t line 967.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [43 <./figs/d1_col_sql/d1_col_sql_4_5_rwd.png> <./figs/d1_col_sql/d1_col_sql_4
-_5_dur.png> <./figs/d1_col_sql/d1_col_sql_7_8_rwd.png> <./figs/d1_col_sql/d1_co
-l_sql_7_8_dur.png>]
-<figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png, id=212, 722.7pt x 361.35pt>
+<figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png, id=210, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png  used on 
-input line 976.
+input line 977.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png, id=213, 722.7pt x 361.35pt>
+<figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png, id=211, 722.7pt x 361.35pt>
 File: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_sql/d1_col_sql_4_5_6_7_8_dur.png  used on 
-input line 981.
+input line 982.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_sql/d2_col_sql_4_5_rwd.png, id=214, 722.7pt x 361.35pt>
+ [44 <./figs/d1_col_sql/d1_col_sql_7_8_rwd.png> <./figs/d1_col_sql/d1_col_sql_7
+_8_dur.png> <./figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png> <./figs/d1_col_sql/d1_
+col_sql_4_5_7_dur.png>]
+<figs/d2_col_sql/d2_col_sql_4_5_rwd.png, id=219, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_rwd.png  used on input 
-line 994.
+line 995.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_sql/d2_col_sql_4_5_dur.png, id=215, 722.7pt x 361.35pt>
+<figs/d2_col_sql/d2_col_sql_4_5_dur.png, id=220, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_dur.png  used on input 
-line 999.
+line 1000.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [44 <./figs/d1_col_sql/d1_col_sql_4_5_7_rwd.png> <./figs/d1_col_sql/d1_col_sql
-_4_5_7_dur.png> <./figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png> <./figs/d1_col
-_sql/d1_col_sql_4_5_6_7_8_dur.png>]
-<figs/d2_col_sql/d2_col_sql_7_8_rwd.png, id=223, 722.7pt x 361.35pt>
+<figs/d2_col_sql/d2_col_sql_7_8_rwd.png, id=221, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_7_8_rwd.png  used on input 
-line 1008.
+line 1009.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_sql/d2_col_sql_7_8_dur.png, id=224, 722.7pt x 361.35pt>
+<figs/d2_col_sql/d2_col_sql_7_8_dur.png, id=222, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_7_8_dur.png  used on input 
-line 1013.
+line 1014.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png, id=225, 722.7pt x 361.35pt>
+ [45 <./figs/d1_col_sql/d1_col_sql_4_5_6_7_8_rwd.png> <./figs/d1_col_sql/d1_col
+_sql_4_5_6_7_8_dur.png> <./figs/d2_col_sql/d2_col_sql_4_5_rwd.png> <./figs/d2_c
+ol_sql/d2_col_sql_4_5_dur.png>]
+<figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png, id=231, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png  used on inpu
-t line 1023.
+t line 1024.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_sql/d2_col_sql_4_5_7_dur.png, id=226, 722.7pt x 361.35pt>
+<figs/d2_col_sql/d2_col_sql_4_5_7_dur.png, id=232, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_7_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_7_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_7_dur.png  used on inpu
-t line 1028.
+t line 1029.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [45 <./figs/d2_col_sql/d2_col_sql_4_5_rwd.png> <./figs/d2_col_sql/d2_col_sql_4
-_5_dur.png> <./figs/d2_col_sql/d2_col_sql_7_8_rwd.png> <./figs/d2_col_sql/d2_co
-l_sql_7_8_dur.png> <./figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png> <./figs/d2_col_
-sql/d2_col_sql_4_5_7_dur.png>]
-<figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png, id=237, 722.7pt x 361.35pt>
+<figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png, id=233, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png  used on 
-input line 1038.
+input line 1039.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png, id=238, 722.7pt x 361.35pt>
+<figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png, id=234, 722.7pt x 361.35pt>
 File: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png  used on 
-input line 1043.
+input line 1044.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_4_5_rwd.png, id=239, 722.7pt x 361.35pt>
+ [46 <./figs/d2_col_sql/d2_col_sql_7_8_rwd.png> <./figs/d2_col_sql/d2_col_sql_7
+_8_dur.png> <./figs/d2_col_sql/d2_col_sql_4_5_7_rwd.png> <./figs/d2_col_sql/d2_
+col_sql_4_5_7_dur.png> <./figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png> <./figs
+/d2_col_sql/d2_col_sql_4_5_6_7_8_dur.png>]
+<figs/d1_col_ac/d1_col_ac_4_5_rwd.png, id=245, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_rwd.png  used on input li
-ne 1058.
+ne 1059.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_4_5_dur.png, id=240, 722.7pt x 361.35pt>
+<figs/d1_col_ac/d1_col_ac_4_5_dur.png, id=246, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_dur.png  used on input li
-ne 1063.
+ne 1064.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [46 <./figs/d2_col_sql/d2_col_sql_4_5_6_7_8_rwd.png> <./figs/d2_col_sql/d2_col
-_sql_4_5_6_7_8_dur.png> <./figs/d1_col_ac/d1_col_ac_4_5_rwd.png> <./figs/d1_col
-_ac/d1_col_ac_4_5_dur.png>]
-<figs/d1_col_ac/d1_col_ac_7_8_rwd.png, id=249, 722.7pt x 361.35pt>
+<figs/d1_col_ac/d1_col_ac_7_8_rwd.png, id=247, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_7_8_rwd.png  used on input li
-ne 1073.
+ne 1074.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_7_8_dur.png, id=250, 722.7pt x 361.35pt>
+<figs/d1_col_ac/d1_col_ac_7_8_dur.png, id=248, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_7_8_dur.png  used on input li
-ne 1078.
+ne 1079.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png, id=251, 722.7pt x 361.35pt>
+<figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png, id=249, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png  used on input 
-line 1087.
+line 1088.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_4_5_7_dur.png, id=252, 722.7pt x 361.35pt>
+<figs/d1_col_ac/d1_col_ac_4_5_7_dur.png, id=250, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_7_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_7_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_7_dur.png  used on input 
-line 1092.
+line 1093.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png, id=253, 722.7pt x 361.35pt>
+ [47 <./figs/d1_col_ac/d1_col_ac_4_5_rwd.png> <./figs/d1_col_ac/d1_col_ac_4_5_d
+ur.png> <./figs/d1_col_ac/d1_col_ac_7_8_rwd.png> <./figs/d1_col_ac/d1_col_ac_7_
+8_dur.png>]
+<figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png, id=258, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png  used on in
-put line 1102.
+put line 1103.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png, id=254, 722.7pt x 361.35pt>
+<figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png, id=259, 722.7pt x 361.35pt>
 File: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d1_col_ac/d1_col_ac_4_5_6_7_8_dur.png  used on in
-put line 1107.
+put line 1108.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [47 <./figs/d1_col_ac/d1_col_ac_7_8_rwd.png> <./figs/d1_col_ac/d1_col_ac_7_8_d
-ur.png> <./figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png> <./figs/d1_col_ac/d1_col_ac_
-4_5_7_dur.png> <./figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png> <./figs/d1_col_ac
-/d1_col_ac_4_5_6_7_8_dur.png>]
-<figs/d2_col_ac/d2_col_ac_4_5_rwd.png, id=264, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_4_5_rwd.png, id=260, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_rwd.png  used on input li
-ne 1118.
+ne 1119.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_ac/d2_col_ac_4_5_dur.png, id=265, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_4_5_dur.png, id=261, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_dur.png  used on input li
-ne 1123.
+ne 1124.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_ac/d2_col_ac_7_8_rwd.png, id=266, 722.7pt x 361.35pt>
+
+[48 <./figs/d1_col_ac/d1_col_ac_4_5_7_rwd.png> <./figs/d1_col_ac/d1_col_ac_4_5_
+7_dur.png> <./figs/d1_col_ac/d1_col_ac_4_5_6_7_8_rwd.png> <./figs/d1_col_ac/d1_
+col_ac_4_5_6_7_8_dur.png>]
+<figs/d2_col_ac/d2_col_ac_7_8_rwd.png, id=269, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_7_8_rwd.png  used on input li
-ne 1133.
+ne 1134.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_ac/d2_col_ac_7_8_dur.png, id=267, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_7_8_dur.png, id=270, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_7_8_dur.png  used on input li
-ne 1138.
+ne 1139.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png, id=268, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png, id=271, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png  used on input 
-line 1148.
+line 1149.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_ac/d2_col_ac_4_5_7_dur.png, id=269, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_4_5_7_dur.png, id=272, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_7_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_7_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_7_dur.png  used on input 
-line 1153.
+line 1154.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [48 <./figs/d2_col_ac/d2_col_ac_4_5_rwd.png> <./figs/d2_col_ac/d2_col_ac_4_5_d
+ [49 <./figs/d2_col_ac/d2_col_ac_4_5_rwd.png> <./figs/d2_col_ac/d2_col_ac_4_5_d
 ur.png> <./figs/d2_col_ac/d2_col_ac_7_8_rwd.png> <./figs/d2_col_ac/d2_col_ac_7_
 8_dur.png>]
-<figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png, id=277, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png, id=280, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png  used on in
-put line 1162.
+put line 1163.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png, id=278, 722.7pt x 361.35pt>
+<figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png, id=281, 722.7pt x 361.35pt>
 File: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png Graphic file (type png)
 <use figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png>
 Package pdftex.def Info: figs/d2_col_ac/d2_col_ac_4_5_6_7_8_dur.png  used on in
-put line 1167.
+put line 1168.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/all_algos_rwd.png, id=279, 722.7pt x 361.35pt>
+<figs/all_algos_rwd.png, id=282, 722.7pt x 361.35pt>
 File: figs/all_algos_rwd.png Graphic file (type png)
 <use figs/all_algos_rwd.png>
-Package pdftex.def Info: figs/all_algos_rwd.png  used on input line 1180.
+Package pdftex.def Info: figs/all_algos_rwd.png  used on input line 1181.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
-<figs/all_algos_dur.png, id=280, 722.7pt x 361.35pt>
+<figs/all_algos_dur.png, id=283, 722.7pt x 361.35pt>
 File: figs/all_algos_dur.png Graphic file (type png)
 <use figs/all_algos_dur.png>
-Package pdftex.def Info: figs/all_algos_dur.png  used on input line 1185.
+Package pdftex.def Info: figs/all_algos_dur.png  used on input line 1186.
 (pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
- [49 <./figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png> <./figs/d2_col_ac/d2_col_ac_4_5
+ [50 <./figs/d2_col_ac/d2_col_ac_4_5_7_rwd.png> <./figs/d2_col_ac/d2_col_ac_4_5
 _7_dur.png> <./figs/d2_col_ac/d2_col_ac_4_5_6_7_8_rwd.png> <./figs/d2_col_ac/d2
 _col_ac_4_5_6_7_8_dur.png> <./figs/all_algos_rwd.png> <./figs/all_algos_dur.png
->] [50]
+>]
+Underfull \hbox (badness 10000) in paragraph at lines 1197--1199
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1206
+
+ []
+
+<figs/betas/d1_SQL_1_to_5_b_avg_dur.png, id=293, 722.7pt x 361.35pt>
+File: figs/betas/d1_SQL_1_to_5_b_avg_dur.png Graphic file (type png)
+<use figs/betas/d1_SQL_1_to_5_b_avg_dur.png>
+Package pdftex.def Info: figs/betas/d1_SQL_1_to_5_b_avg_dur.png  used on input 
+line 1212.
+(pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
+<figs/betas/d1_SQL_5_to_8_b_avg_dur.png, id=294, 722.7pt x 361.35pt>
+File: figs/betas/d1_SQL_5_to_8_b_avg_dur.png Graphic file (type png)
+<use figs/betas/d1_SQL_5_to_8_b_avg_dur.png>
+Package pdftex.def Info: figs/betas/d1_SQL_5_to_8_b_avg_dur.png  used on input 
+line 1217.
+(pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
+<figs/betas/d1_SQL_8_to_10_b_avg_dur.png, id=295, 722.7pt x 361.35pt>
+File: figs/betas/d1_SQL_8_to_10_b_avg_dur.png Graphic file (type png)
+<use figs/betas/d1_SQL_8_to_10_b_avg_dur.png>
+Package pdftex.def Info: figs/betas/d1_SQL_8_to_10_b_avg_dur.png  used on input
+ line 1224.
+(pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
+<figs/betas/d1_SQL_large_b_avg_dur.png, id=296, 722.7pt x 361.35pt>
+File: figs/betas/d1_SQL_large_b_avg_dur.png Graphic file (type png)
+<use figs/betas/d1_SQL_large_b_avg_dur.png>
+Package pdftex.def Info: figs/betas/d1_SQL_large_b_avg_dur.png  used on input l
+ine 1229.
+(pdftex.def)             Requested size: 230.36061pt x 115.17671pt.
+[51]
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1233
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1235
+
+ []
+
+[52 <./figs/betas/d1_SQL_1_to_5_b_avg_dur.png> <./figs/betas/d1_SQL_5_to_8_b_av
+g_dur.png> <./figs/betas/d1_SQL_8_to_10_b_avg_dur.png> <./figs/betas/d1_SQL_lar
+ge_b_avg_dur.png>] [53]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1207--1208
+Underfull \hbox (badness 10000) in paragraph at lines 1270--1271
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1209--1210
+Underfull \hbox (badness 10000) in paragraph at lines 1272--1273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1211--1212
+Underfull \hbox (badness 10000) in paragraph at lines 1274--1275
 
  []
 
-(./project_report - pg.bbl [51
 
-] [52
+Underfull \hbox (badness 10000) in paragraph at lines 1276--1277
 
-] [53] [54]) [55]
+ []
+
+(./project_report - pg.bbl [54
+
+] [55
+
+] [56] [57]) [58]
 Appendix A.
-<figs/GridWorlds.png, id=309, 754.82pt x 407.5225pt>
+<figs/GridWorlds.png, id=327, 754.82pt x 407.5225pt>
 File: figs/GridWorlds.png Graphic file (type png)
 <use figs/GridWorlds.png>
-Package pdftex.def Info: figs/GridWorlds.png  used on input line 1225.
+Package pdftex.def Info: figs/GridWorlds.png  used on input line 1290.
 (pdftex.def)             Requested size: 322.50345pt x 174.11818pt.
-<figs/distral1_2_diagram.png, id=310, 289.08pt x 229.85875pt>
+<figs/distral1_2_diagram.png, id=328, 289.08pt x 229.85875pt>
 File: figs/distral1_2_diagram.png Graphic file (type png)
 <use figs/distral1_2_diagram.png>
-Package pdftex.def Info: figs/distral1_2_diagram.png  used on input line 1231.
+Package pdftex.def Info: figs/distral1_2_diagram.png  used on input line 1296.
 (pdftex.def)             Requested size: 207.32315pt x 164.84929pt.
-<figs/SAC.png, id=311, 581.17125pt x 732.7375pt>
+<figs/SAC.png, id=329, 581.17125pt x 732.7375pt>
 File: figs/SAC.png Graphic file (type png)
 <use figs/SAC.png>
-Package pdftex.def Info: figs/SAC.png  used on input line 1237.
+Package pdftex.def Info: figs/SAC.png  used on input line 1302.
 (pdftex.def)             Requested size: 391.61586pt x 493.74911pt.
-[56
+[59
 
- <./figs/GridWorlds.png>] [57 <./figs/distral1_2_diagram.png>] [58 <./figs/SAC.
-png>] (./project_report - pg.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ <./figs/GridWorlds.png>] [60 <./figs/distral1_2_diagram.png>] [61 <./figs/SAC.
+png>] (./project_report - pg.aux) ) 
 Here is how much of TeX's memory you used:
- 3564 strings out of 492616
- 54382 string characters out of 6129481
- 120720 words of memory out of 5000000
- 7339 multiletter control sequences out of 15000+600000
- 16874 words of font info for 70 fonts, out of 8000000 for 9000
+ 3593 strings out of 492616
+ 55323 string characters out of 6129481
+ 120735 words of memory out of 5000000
+ 7363 multiletter control sequences out of 15000+600000
+ 18227 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,17n,27p,944b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
-ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
-al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
-/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/t
-exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/tex
-live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
-e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
-019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2019/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/texmf
--dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2019/texmf-
-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "project_report - pg.pdf" (62 pages, 7508892 bytes).
+ 41i,17n,27p,984b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2019/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.p
+fb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pf
+b></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
+0.pfb>
+Output written on "project_report - pg.pdf" (65 pages, 8058100 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
- 200 compressed objects within 2 object streams
+ 408 PDF objects out of 1000 (max. 8388607)
+ 206 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 266 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 286 words of extra memory for PDF output out of 10000 (max. 10000000)
 

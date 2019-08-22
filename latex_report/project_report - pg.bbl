@@ -53,6 +53,11 @@ Guillaume Lample and Devendra~Singh Chaplot.
 \newblock In {\em Thirty-First AAAI Conference on Artificial Intelligence},
   2017.
 
+\bibitem{mackay2003information}
+David~JC MacKay and David~JC Mac~Kay.
+\newblock {\em Information theory, inference and learning algorithms}.
+\newblock Cambridge university press, 2003.
+
 \bibitem{mitchell1993explanation}
 Tom~M Mitchell and Sebastian~B Thrun.
 \newblock Explanation-based neural network learning for robot control.
