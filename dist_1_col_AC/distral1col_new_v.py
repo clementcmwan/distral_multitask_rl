@@ -135,14 +135,15 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     # calculate MSE/huber loss for state value estimates (1 step TD)
     reg_rewards = []
 
-    # reformating into tensors
+    # reformatting into tensors
     states, actions = np.asarray(policy.state_action)[:,0], np.asarray(policy.state_action)[:,1]
     states, actions = np.array([*states]), np.array([*actions]).reshape(-1,1)
 
     _ , q_thetas = policy(torch.Tensor(states))
 
     # q_thetas = q_thetas.gather(1,torch.tensor(actions))
-    v_thetas = torch.log((torch.pow(p0_probs, alpha) *torch.exp(beta*q_thetas)).sum(1)) / beta # from equation 55 bekerley paper
+    temp_term = beta*q_thetas - torch.max(beta*q_thetas)
+    v_thetas = torch.log((torch.pow(p0_probs, alpha) *torch.exp(temp_term)).sum(1)) / beta # from equation 55 bekerley paper
 
     q_values = np.zeros(len(states))
     v_val = final_state_value
@@ -164,8 +165,8 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     # q_values = (q_values - q_values.mean())/(q_values.std() + 1e-15)
 
     # MSE for 1 step TD
-    # critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
-    critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
+    critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
+    # critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
 
     # get losses for current task, from equation 9
     for t, (log_prob_i) in enumerate(policy_actions): 
@@ -180,11 +181,11 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
 
     for param in policy.parameters():
         # if param.grad is not None:
-        param.grad.data.clamp_(-1, 1)
+        param.grad.data.clamp_(-100, 100)
 
     opt_policy.step()
 
-    return torch.stack(task_policy_loss).sum()
+    return torch.stack(task_policy_loss).mean()
 
 
 # policy gradient for distilled policy
@@ -201,7 +202,7 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
 
         mismatch_loss_i = []
         
-        # Retrive distilled policy actions and action prefs
+        # Retrieve distilled policy actions and action prefs
         distill_probs = distilled.pi_prob[task_id]
         distill_action_prefs = distilled.action_pref[task_id]
 
@@ -227,8 +228,8 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
 
     loss.backward(retain_graph=True)
 
-    # for param in distilled.parameters():
-    #     param.grad.data.clamp_(-500, 500)
+    for param in distilled.parameters():
+        param.grad.data.clamp_(-500, 500)
 
     opt_distilled.step()
 
@@ -300,7 +301,9 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
             next_state = torch.from_numpy(np.asarray(next_state)).float()
             _, action_pref_temp = models[i_env](next_state)
             pi_0_temp, _ = distilled(next_state)
-            final_state_value = torch.log((torch.pow(pi_0_temp, alpha) * torch.exp(beta*action_pref_temp)).sum()) / beta            
+
+            temp_term = beta*action_pref_temp - torch.max(beta*action_pref_temp)
+            final_state_value = torch.log((torch.pow(pi_0_temp, alpha) * torch.exp(temp_term)).sum()) / beta            
 
             if done:
                 final_state_value = 0
@@ -326,4 +329,4 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
 
 if __name__ == '__main__':
     # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
-    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.00055, num_episodes=200)
+    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200, beta=10)

@@ -87,7 +87,7 @@ def select_action(state, policy, model, num_actions,
         # pi0_a_pref = policy.forward_action_pref(Variable(state).type(FloatTensor))
 
         # calculate the numerator of equation 8
-        term = 100*Q
+        term = 5*Q
         max_term = torch.max(term)
         
         # get equation 8, pi_i(a_t | s_t)
@@ -170,11 +170,24 @@ def optimize_model(policy, model, optimizer, memory, batch_size,
     reward_batch = (reward_batch.unsqueeze(1) + (alpha/beta)*torch.log(policy.forward(state_batch).gather(1, action_batch))
                      - (1/beta)*torch.log(pi_i.gather(1, action_batch)))
 
+
+    # print(torch.sum(reward_batch.unsqueeze(1)))
+    # print(torch.sum((alpha/beta)*torch.log(policy.forward(state_batch).gather(1, action_batch))))
+    # print(torch.sum((1/beta)*torch.log(pi_i.gather(1, action_batch))))
+    # print(torch.sum(reward_batch))
+    # print( )
+
     # Compute Q(s_t, a) - the model computes Q(s_t), then we select the
     # columns of actions taken
     state_action_values = model(state_batch).gather(1, action_batch)
 
     # Compute V(s_{t+1}) for all next states, 2nd component of equation 7
+    # temp_term = beta*model(non_final_next_states) - torch.max(beta*model(non_final_next_states))
+    # next_state_values = torch.zeros(batch_size).type(Tensor)
+    # next_state_values[non_final_mask] = ( torch.log(
+    #     (torch.pow(policy.forward(non_final_next_states), alpha)
+    #     * (torch.exp(temp_term) + 1e-16)).sum(1)) / beta ).detach()
+
     next_state_values = torch.zeros(batch_size).type(Tensor)
     next_state_values[non_final_mask] = ( torch.log(
         (torch.pow(policy.forward(non_final_next_states), alpha)
@@ -182,6 +195,8 @@ def optimize_model(policy, model, optimizer, memory, batch_size,
     
     if np.isnan(next_state_values.sum().data.numpy()):
         print('true')
+
+    # print(torch.sum(torch.exp(beta * model(non_final_next_states))))
 
     # Now, we don't want to mess up the loss with a volatile flag, so let's
     # clear it. After this, we'll just end up with a Variable that has

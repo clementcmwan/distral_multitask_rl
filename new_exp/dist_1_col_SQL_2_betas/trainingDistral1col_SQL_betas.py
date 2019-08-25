@@ -11,8 +11,6 @@ from network import DQN, select_action, optimize_model, Tensor, optimize_policy,
 import sys
 sys.path.append('../../envs/')
 from gridworld_env import GridworldEnv
-sys.path.append('../../')
-from utils import plot_rewards, plot_durations, plot_state, get_screen
 
 def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
             GridworldEnv(4), GridworldEnv(6)], batch_size=128, gamma=0.999, alpha=0.8,
@@ -106,9 +104,6 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
 
                 states[i_env] = torch.from_numpy( env.reset() ).type(torch.FloatTensor).view(-1,input_size)
 
-                if is_plot:
-                    plot_rewards(episode_rewards, i_env)
-
 
         optimize_policy(policy, policy_optimizer, memories, batch_size,
                     num_envs, gamma, alpha, beta)
@@ -130,4 +125,4 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
 if __name__ == '__main__':
     # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001, max_num_steps_per_episode=100, num_episodes=1000)
     # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001)
-    trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5)], learning_rate=0.001, beta=5)
+    trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5)], learning_rate=0.001, beta=4)

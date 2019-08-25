@@ -127,6 +127,11 @@ things I did to extend experiments from original work
 	\item added back temperature coeff to Distral 1 col via SQL and via AC to compare to the original algo
 \end{itemize}
 
+There are 2 main variant of algorithms from the original work by Teh et al. The first algorithm is called Distral 1 column or Distral 1 col. The second algorithm is called Distral 2 column or Distral 2 col. Both algorithms can be implemented in either a soft Q-learning (SQL) or regularized Actor-Critic (AC) framework. The original work has tested Distral 2 col via SQL versus SQL baseline on 4 2D mazes. All 2D mazes have the same structure and only differ in the starting and goal states, \textbf{as shown in figure ..}. The experiment was conducted using a 10 step TD learning, where maximum number of steps per episode is 100 for 1000 episodes. We replicated this experiment with identical conditions and have achieved results consistent with the original work's reported performance, as demonstrated in \textbf{section ..}. The original work has also tested Distral 1 col and 2 col vis SQL on numerous DeepMind Lab environments, including 8 3D mazes, 4 Navigation tasks, and 8 laser tag environments. Note that each variant for each type of environment was trained on 10 billion frames.\\
+
+We have decided to focus our efforts in testing studying the behaviour of the algorithms. This requires numerous deployments of algorithms, thus we have exclusively tested the algorithms on the 2D maze to significantly reduce training time. Specifically, our contributions include extended experiments on Distral 1 col and 2 col under both the SQL regularized AC frameworks. We also altered the settings such that all algorithms are doing a 1-step TD learning with 1000 steps as maximum number of steps per episode for 200 episode instead. The motivation for doing so is because testing the algorithms with 10 steps TD learning for 1000 episodes is substantially more time consuming than using a 1 step TD learning for 200 episodes. Furthermore, we decided that changing the maximum number of step per episode from 1000 to 200 is a reasonable compensation for lowering the number of episodes trained in total.\\
+
+In addition to the extended testing of Distral 1 col and 2 col on both SQL and regularized AC frameworks, we have also discovered a new variant of Distral 1 col during the process of understanding why Distral 1 col SQL performs worse than Distral 2 col SQL. This algorithm significantly outperforms its predecessor on the 2D mazes. We call this algorithm Distral 1 col beta, because of the additional $\beta$ coefficient multiplied to calculate the task-specific policies $\pi_i(a_t|s_t)$. We demonstrate this new algorithm's ability to rival its counterpart Distral 2 col, as shown in \textbf{section ..}.
 
 
 
@@ -708,7 +713,7 @@ where the soft advantages are estimated with $\theta_i$ and $\pi_0$
     \hat{A}_i(a_t|s_t) &= \hat{Q}_i(a_t,s_t) - \hat{V}_i(s_t) \nonumber\\
     &= f_{\theta_i}(a_t|s_t) - \frac{1}{\beta}\log \sum_a \hat{\pi}_0^\alpha(a|s_t)\exp{(\beta f_{\theta_i}(a|s_t))} \label{eq:distral-SQL-V}
 \end{align}
-as stated in \cite{teh2017distral} and proven in \cite{rawlik2013stochastic} \cite{fox2015taming} \cite{nachum2017bridging}. This is known as Distral 2 column or Distral 2 col, which is interpreted as each task-specific policy relying on the distilled policy plus the adaptation required to specialize to its task. The visual representation of the structures of Distral 1 and 2 col is shown in figure \ref{fig:distral12} attached in the appendix.\\
+as stated in \cite{teh2017distral}\footnote{Note that the definition of $\hat{V}_i(s_t)$ differs from SQL's definition in that the reference policy $\pi_0$ is taken to power of $\alpha$.} and proven in \cite{rawlik2013stochastic} \cite{fox2015taming} \cite{nachum2017bridging}. This is known as Distral 2 column or Distral 2 col, which is interpreted as each task-specific policy relying on the distilled policy plus the adaptation required to specialize to its task. The visual representation of the structures of Distral 1 and 2 col is shown in figure \ref{fig:distral12} attached in the appendix.\\
 
 With the two architectures for task-specific policies in mind, we can test for them via either a actor-critic (AC) with regularized rewards or soft Q-learning framework (SQL). These frameworks should result in similar performance as they are shown to be equivalent in \cite{schulman2017equivalence}. In this report, we will use both SQL and AC framework for both distral algorithms.
 
@@ -919,7 +924,7 @@ This result is compared to this report's replication of the experiment
 \end{figure}
 As shown above, the results matches the behaviour demonstrated in the original paper. Distral 2 col via SQL learns significantly faster and has lower averaged duration and higher rewards across 5 tasks in the 2-corridor environment. Note that performance may vary depending on the architecture of the neural networks used in to approximate policies, state and action value estimates.
 
-\section{Extended Experiments}
+\section{Extended Experiments under SQL framework}
 \subsection{Distral 1 col vs SQL}
 
 Although the results were replicated through 10-step TD learning and setting the maximum number of episodes to 100, we should note that it is substantially more time consuming to conduct the experiments with such settings. Therefore, we will set $n=1$ instead of $n=10$ and maximum number of steps per episode to 1000 instead of 100. Given these new settings, we will also reduce the number of episodes from 1000 to 200 as one would expect the algorithms to converge quicker if the maximum number of steps per episode is increased by 10 folds. Further, we will also set $\alpha = 0.8$ in order for $\pi_0$ to act as a soft prior on $\pi_i$. Finally, we will also set $\beta = 5$ to match the setting as mentioned in the original work \cite{teh2017distral}. Below are the results of Distral 1 col via the SQL framework, versus SQL trained separately on each task.
@@ -1231,13 +1236,47 @@ This can be verified empirically by comparing the performance of Distral 1 col v
 \end{figure}
 As we can see on the top-left figure, the effects of adjusting $\beta^\prime$ from 1 to 5 is very apparent. We can also see that the average duration at $\beta^\prime = 4$ decreases faster than $\beta^\prime = 5$ initially, but at around episode 60 setting $\beta^\prime = 5$ results in lower average duration across tasks. Similar observation can be made on the top-right figure, where Distral 1 col's performance continued to improve as $\beta^\prime$ is increased from 5 to 8. However, we can also see on the bottom-left figure that increasing $\beta^\prime$ from 8 to 10 only provided minor improvements on the algorithm's performance. A similar argument can be made for the bottom-right figure, where $\beta^\prime=10,50,100$ is compared. Thus, we can conclude that a large enough $\beta^\prime$ (i.e. from 5 to 8) will allow the algorithm to make decisive choices instead of sampling from a uniform-like distribution.\\
 
-We should also note that aside from approaching the effects of $\beta^\prime$ from the information theory's point of view, the original work \cite{teh2017distral} also mentioned that as $\beta^\prime \rightarrow \infty$, the soft-Bellman updates as stated in equation (\ref{eq:SQL-v-est}) hardens to a \texttt{max} operator. The same behaviour applies to the task-specific policy $\pi_i(a_t|s_t)$, such that multiplying a large enough coefficient to $f_{\theta_i}$ results in a one-hot like distribution across actions. This also implies that for a very large $\beta^\prime$, the algorithm may not converge because of acting greedy too early.\\
+We should also note that instead of understanding the effects of $\beta^\prime$ from the information theory's point of view, the original work \cite{teh2017distral} also mentioned that as $\beta^\prime \rightarrow \infty$, the soft-Bellman updates as stated in equation (\ref{eq:SQL-v-est}) hardens to a \texttt{max} operator. The same behaviour applies to the task-specific policy $\pi_i(a_t|s_t)$, such that multiplying a large enough coefficient to $f_{\theta_i}$ results in a one-hot like distribution across actions. This also implies that for a very large $\beta^\prime$, the algorithm may not converge because of acting greedy too early.\\
 
-Conversely, if we fix $\beta^\prime = 5$ and set $\beta = 3$, we discover that Distral 1 col diverges. This is likely due to the fact \textbf{NEED TO EXPLAIN WHY IT DIVERGES..}
+Conversely, if we fix $\beta = 5$ and decrease the value of $\beta$, we discover that Distral 1 col diverges. This is due to taking the exponent of large numbers when calculating $\hat{V}$ as defined in equation (\ref{eq:distral-SQL-V}). For $\beta = 2,3,4$, we can avoid this numerical overflow by subtracting $f_{\theta_i}$ with its largest number. However, we should note that this technique could not prevent numeric overflow for setting $\beta = 1$. The resulting performance on environment 4 and 5 are as follows
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figs/betas/d1_SQL_2_to_5_b_avg_dur.png}
+\end{figure}
+As we can see, Distral 1 col manages to converge to a solution for environments 4 and 5 after fixing $\beta^\prime$ at 5, lowering $\beta$ and the numerical stabilization. This indicates the inverse temperature $\beta^\prime$ plays a vital role in helping the algorithm make correct actions. We also see that lowering $\beta$ makes the algorithm substantially less stable than setting $\beta^\prime \ge 5$ and $\beta = 5$. Specifically, we can see that the average duration increases from episodes 50 to 130 before decreasing and converging to a final solution. Whereas, fixing $\beta = 5$ and using $\beta^\prime \ge 5$ did not exhibit this behaviour.
 
-\subsection{Comparing Distral 1 col beta vs Distral 2 col under SQL}
+\subsection{Distral 1 col beta vs Distral 2 col under SQL framework}
 
-Given the the discovery of the importance of multiplying the $\beta^\prime$ coefficient in 
+Given the discovery of the importance of multiplying the $\beta^\prime$ coefficient to $f_{\theta_i}$, we should compare the performance of Distral 1 col beta and Distral 2 col under the SQL framework
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figs/betas/d1_b_d2_SQL_avg_rwd.png}
+\end{minipage}%
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figs/betas/d1_b_d2_SQL_avg_dur.png}
+\end{minipage}%
+\end{figure}
+As shown above, the average duration and reward for Distral 1 col beta rivals Distral 2 col under the SQL framework, confirming that we have discovered a modification on the original algorithm that results in significant performance boost.\\
+
+\textbf{NEED TO EXPLAIN WHY AC FRAMEWORK DOESNT WORK WELL}
+
+- AC framework needs the entire episode to finish before an update, whereas for SQL it was sampling only from memory buffer, this means the updates for AC are highly correlated which is bad for learning? (need to check that)\\
+
+- SQL framework updates $\pi_0$ by fitting it to a mixture of state-action distribution for each task under each task-specific policy. This is basically MLE, whereas in the AC framework we need to do policy gradient for both $\pi_i$ and $\pi_0$ and each policy gradient introduces more variances to the update. We can see that as more task-specific policies are involved the performance of the algorithms under the AC framework gets substantially worse as shown in section \textbf{ac results}\\
+
+- can also be due to the fact that SQL updates more frequently and thus gets to use to most "updated" policies\\
+
+- can also be because AC framework needs to wait for all envs to finish one episode at each iteration before updating, whereas SQL doesn't need to\\
+
+- don't know if this helps but the algorithms under AC has a much smaller learning rate than SQL. setting the learning rate at 0.001 will make AC algos diverge\\
+
+% - AC relied on bootstrapping guesses from guesses so it could spiral out of control?
+
+
 
 
 % Specifically, the rewards are defined in terms of both the task-specific and distilled policies, which is then used to optimize the distilled policy. This means commonalities across tasks are condensed into the distilled policy, but is never accessed during action selection for Distral 1 col. This can be empirically demonstrated by comparing the average magnitude of the task-specific and distilled policies' logits, $f_{\theta_i}$ and $h_{\theta_0}$ as shown below
@@ -1255,7 +1294,7 @@ Given the the discovery of the importance of multiplying the $\beta^\prime$ coef
 % \end{figure}
 % The figures above show the norm of $f_{\theta_i}$ and $h_{\theta_0}$ for both Distral algorithms trained on environments 4 and 5 simultaneously. We see that for both Distral algorithms, the average magnitude of the distilled policy's logits $h_{\theta_0}$ becomes similar as the number of episodes increases. Whereas, the norm of task-specific logits $f_{\theta_i}$ tends towards 0.5 as the number of episodes increases. This indicates that the distilled policy is mostly responsible for each algorithm's performance. As a result, we can see that the predominant reason for Distral 1 col's poor behaviour is likely due to the fact that distilled policy's logits were not involved in the decision making process.\\
 
-\textbf{NEED TO EXPLAIN WHY AC FRAMEWORK SUCKS}
+
 
 
 % \section{Distral 1 col vs Distral 1 col with $\beta$ coefficient}

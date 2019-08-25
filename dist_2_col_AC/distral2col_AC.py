@@ -152,6 +152,8 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     q_thetas = policy(torch.Tensor(states))
 
     # get v_theta as stated from equation 55 from Schulman et al. and equation 7 from Teh et al.
+    # max_term = torch.max(beta*q_thetas, dim=1)[0].unsqueeze(1).expand_as(q_thetas)
+    # temp_term = beta*q_thetas - max_term
     v_thetas = torch.log((torch.pow(p0_probs,alpha) * torch.exp(beta*q_thetas)).sum(1)) / beta 
 
     q_values = np.zeros(len(states))
@@ -185,10 +187,11 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     #     advantage = (q_values[t] - v_thetas[t]).detach()
     #     task_policy_loss.append(log_prob_i * advantage)
 
-    gammas_episode = [gamma**i for i in range(len(policy_actions))]
+    # gammas_episode = [gamma**i for i in range(len(policy_actions))]
     for t, (log_prob_i) in enumerate(policy_actions): 
-        dis_rwd = [g*rwd for g,rwd in zip(gammas_episode,reg_rewards[t:])]
-        task_policy_loss.append(log_prob_i * np.sum(dis_rwd))
+        # dis_rwd = np.asarray(gammas_episode[:len(reg_rewards[t:])]) * reg_rewards[t:]
+        # dis_rwd = [g*rwd for g,rwd in zip(gammas_episode,reg_rewards[t:])]
+        task_policy_loss.append(log_prob_i * np.sum(reg_rewards[t:]))
 
     opt_policy.zero_grad()
 
@@ -198,14 +201,14 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     loss.backward(retain_graph=True)
 
     # gradient clipping
-    # for param in policy.parameters():
-    #     if param.grad is not None:
-    #         param.grad.data.clamp_(-1, 1)
+    for param in policy.parameters():
+        if param.grad is not None:
+            param.grad.data.clamp_(-500, 500)
 
     opt_policy.step()
 
     # return the sum of policy grad for equation 10 from Teh et al.
-    return torch.stack(task_policy_loss).sum()
+    return torch.stack(task_policy_loss).mean()
 
 
 # policy gradient for distilled policy
@@ -243,14 +246,14 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
 
     loss =  -(torch.stack(task_specific_loss).sum() + (alpha/beta) * torch.stack(mismatch_loss).sum())
 
-    print(torch.stack(task_specific_loss).sum())
-    print(((alpha/beta) * torch.stack(mismatch_loss).sum())[0])
-    print(loss)
+    # print(torch.stack(task_specific_loss).sum())
+    # print(((alpha/beta) * torch.stack(mismatch_loss).sum())[0])
+    # print(loss)
 
     loss.backward(retain_graph=True)
 
-    # for param in distilled.parameters():
-    #     param.grad.data.clamp_(-500, 500)
+    for param in distilled.parameters():
+        param.grad.data.clamp_(-500, 500)
 
     opt_distilled.step()
 
@@ -349,4 +352,4 @@ def trainDistral( file_name="Distral_2col_AC", list_of_envs=[GridworldEnv(5), Gr
 
 if __name__ == '__main__':
     # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
-    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200)
+    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200, beta=10)
