@@ -72,7 +72,7 @@ Supervisor: John Shawne-Taylor}
 \end{abstract}
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-Summarise your report concisely.
+This report explores the problem of Multitask Reinforcement Learning through capturing commonalities across task-specific policies and condensing into a distilled policy. We examine algorithms introduced by Teh et al. \cite{teh2017distral} by first discussing the origins of these algorithms, and then conducted extended experiments to study the algorithms' behaviours. Through experimentation we also derived a variant of one of the original algorithms, called Distral 1 col beta, which significantly outperforms its predecessor under the soft Q-learning framework.
 \end{abstract}
 \tableofcontents
 \setcounter{page}{1}
@@ -80,58 +80,50 @@ Summarise your report concisely.
 % motivation, objectives, structure of the thesis
 
 \chapter{Introduction and Key Results}
-\section{Summary}
 
-This report primarily focuses on two approaches to multitask reinforcement learning via policy distillation presented in Teh et al. \cite{teh2017distral}. The first approach is through soft Q-learning, a variant of Q-learning and the second approach is through regularized actor-critic, a variant of the conventional actor-critic framework. The origin of both methods are laid out as follows
-
-\begin{enumerate}
-\item SQL framework:
-\begin{enumerate}
-    \item 
-    Classical Q-learning
-    \item
-    Deep Q-learing (DQN) via function approximation and experience replay
-    \item
-    Soft Q-learning (SQL) via regularized returns
-    \item
-    Multitask learning by alternating between SQL and policy distillation (Distral 2 col)
-\end{enumerate}    
-\item Regularized Actor-Critic framework:
-\begin{enumerate}
-    \item 
-    Classical policy gradient, and REINFORCE algorithm
-    \item
-    Advantage Actor-Critic (A2C)
-    \item
-    Asynchronous Advantage Actor-Critic (A3C)
-    \item
-    Regularized Actor-Critic
-    \item
-    Multitask learning by alternating between task-specific AC and policy gradient w.r.t. distilled policy (Distral 1 col)
-\end{enumerate}
-\end{enumerate}
-
-In both frameworks, each algorithm serves as a prerequisite for subsequent one.
-
-
-things I did to replicate the experiments from original work
-\begin{itemize}
-	\item replicated Distral 2 columns via SQL versus SQL across multiple tasks
-\end{itemize}
-things I did to extend experiments from original work
-\begin{itemize}
-	\item tested Distral 1 col via SQL versus SQL
-	\item tested Distral 2 col via SQL versus SQL
-	\item tested Distral 1 col via AC versus A3C
-	\item tested Distral 2 col via AC versus A3C
-	\item added back temperature coeff to Distral 1 col via SQL and via AC to compare to the original algo
-\end{itemize}
-
+\section{Objectives and Contributions}
 There are 2 main variant of algorithms from the original work by Teh et al. The first algorithm is called Distral 1 column or Distral 1 col. The second algorithm is called Distral 2 column or Distral 2 col. Both algorithms can be implemented in either a soft Q-learning (SQL) or regularized Actor-Critic (AC) framework. The original work has tested Distral 2 col via SQL versus SQL baseline on 4 2D mazes. All 2D mazes have the same structure and only differ in the starting and goal states, \textbf{as shown in figure ..}. The experiment was conducted using a 10 step TD learning, where maximum number of steps per episode is 100 for 1000 episodes. We replicated this experiment with identical conditions and have achieved results consistent with the original work's reported performance, as demonstrated in \textbf{section ..}. The original work has also tested Distral 1 col and 2 col vis SQL on numerous DeepMind Lab environments, including 8 3D mazes, 4 Navigation tasks, and 8 laser tag environments. Note that each variant for each type of environment was trained on 10 billion frames.\\
 
 We have decided to focus our efforts in testing studying the behaviour of the algorithms. This requires numerous deployments of algorithms, thus we have exclusively tested the algorithms on the 2D maze to significantly reduce training time. Specifically, our contributions include extended experiments on Distral 1 col and 2 col under both the SQL regularized AC frameworks. We also altered the settings such that all algorithms are doing a 1-step TD learning with 1000 steps as maximum number of steps per episode for 200 episode instead. The motivation for doing so is because testing the algorithms with 10 steps TD learning for 1000 episodes is substantially more time consuming than using a 1 step TD learning for 200 episodes. Furthermore, we decided that changing the maximum number of step per episode from 1000 to 200 is a reasonable compensation for lowering the number of episodes trained in total.\\
 
 In addition to the extended testing of Distral 1 col and 2 col on both SQL and regularized AC frameworks, we have also discovered a new variant of Distral 1 col during the process of understanding why Distral 1 col SQL performs worse than Distral 2 col SQL. This algorithm significantly outperforms its predecessor on the 2D mazes. We call this algorithm Distral 1 col beta, because of the additional $\beta$ coefficient multiplied to calculate the task-specific policies $\pi_i(a_t|s_t)$. We demonstrate this new algorithm's ability to rival its counterpart Distral 2 col, as shown in \textbf{section ..}.
+
+% \section{Structure of the Thesis}
+
+% This report primarily focuses on two approaches to multitask reinforcement learning via policy distillation presented in Teh et al. \cite{teh2017distral}. The first approach is through soft Q-learning, a variant of Q-learning and the second approach is through regularized actor-critic, a variant of the conventional actor-critic framework. The origin of both methods are laid out as follows
+
+% \begin{enumerate}
+% \item SQL framework:
+% \begin{enumerate}
+%     \item 
+%     Classical Q-learning
+%     \item
+%     Deep Q-learing (DQN) via function approximation and experience replay
+%     \item
+%     Soft Q-learning (SQL) via regularized returns
+%     \item
+%     Multitask learning by alternating between SQL and policy distillation (Distral 2 col)
+% \end{enumerate}    
+% \item Regularized Actor-Critic framework:
+% \begin{enumerate}
+%     \item 
+%     Classical policy gradient, and REINFORCE algorithm
+%     \item
+%     Advantage Actor-Critic (A2C)
+%     \item
+%     Asynchronous Advantage Actor-Critic (A3C)
+%     \item
+%     Regularized Actor-Critic
+%     \item
+%     Multitask learning by alternating between task-specific AC and policy gradient w.r.t. distilled policy (Distral 1 col)
+% \end{enumerate}
+% \end{enumerate}
+
+% In both frameworks, each algorithm serves as a prerequisite for subsequent one.
+
+
+
+
 
 
 
@@ -142,7 +134,7 @@ Reinforcement Learning (RL) is a subject whose core goal is to learn to make ``g
 
 % \subsection{Agent, Environment and Markov Decision Processes (MDPs)}
 
-The agent-environment interaction is typically described as follows. At each timestep, the agent receives an observation and reward from the environment (except on the first step). The agent then picks an action according to the given observation. In turn, the environment receives an action and reacts by returning a reward signal and observation to the agent.\\
+The agent-environment interaction is typically described as follows. At each timestep, the agent receives an \texttt{observation} and \texttt{reward} from the environment (except on the first step). The agent then picks an \texttt{action} according to the given observation. In turn, the environment receives an action and reacts by returning a reward signal and observation to the agent.\\
 
 The reward signal is a scalar that serves as an indication to quantify how well the agent is the doing at that time. Therefore, maximizing the amount of rewards in the long run aligns with the goal to make ``good'' decisions through interacting with the environment. That is, the core goal of an RL problem is to maximize the following
 \begin{align}
@@ -342,9 +334,7 @@ One of the most compelling motivation for us to optimize against $\pi$ instead o
     \caption{Sonic Mania, a 2D platformer}
     \label{fig:sonic}
 \end{figure}
-In addition, policy-based methods also has some advantages over value-based methods. Specifically, policy-based methods have better convergence properties, are effective in high dimensional or continuous spaces, and can learn stochastic policies. \textbf{ADD MORE CONTENT ELABORATING ADVANTAGES AND ALSO TALK ABOUT DISADVANTAGES}\\
-
-Policy-based methods are better than the conventional $\epsilon$-greedy action selection simply because parameterization of action selection probabilities change smoothly with respect to its learned parameters \cite{sutton2018reinforcement}. In contrast, $\epsilon$-greedy policy can change drastically due to a small perturbation because of the \texttt{argmax} mechanism over action value estimates.\\
+In addition, policy-based methods also has some advantages over value-based methods. Specifically, policy-based methods have better convergence properties, are effective in high dimensional or continuous spaces, and can learn stochastic policies. Policy-based methods are better than the conventional $\epsilon$-greedy action selection simply because parameterization of action selection probabilities change smoothly with respect to its learned parameters \cite{sutton2018reinforcement}. In contrast, $\epsilon$-greedy policy can change drastically due to a small perturbation because of the \texttt{argmax} mechanism over action value estimates.\\
 
 Moreover, policy-based methods are also convenient for learning the action selection probabilities in a very large or continuous action space. For example, a continuous action space can be parameterized as a Gaussian policy such that
 \begin{align}
@@ -551,8 +541,6 @@ where the gradient of the loss w.r.t $\theta$ is
 \begin{align}
     \nabla L(\pi_\theta)&=\frac{1}{2}\mathbb{E}\left[\nabla_\theta Q_\theta(a)(Q_\theta(a)-r)\right]
 \end{align}
-
-\textbf{FOR VALUE BASED METHODS...}
 
 \subsection{Setup for entropy-regularized MDPs} \label{sec:entropy-mdp}
 
@@ -868,14 +856,13 @@ s_j)-\frac{1}{\beta}\log \hat{\pi}_i(a_j|s_j) + \hat{V}_{\theta_i}(s_{j+1})$
 
 \subsection{Network Architectures of Distral Algorithms}
 
-Since Teh et al. \cite{teh2017distral} did not specify the network architecture used in the function approximations for $\pi_i$ and $\pi_0$'s action value estimates and action preferences, we will use a simple 3 layer deep neural network.\\
-
-Specifically, all neural networks will have the following architecture
-
-\textbf{INSERT DIAGRAM FOR NN}
-
-
-
+Since Teh et al. \cite{teh2017distral} did not specify the network architecture used in the function approximations for $\pi_i$ and $\pi_0$'s action value estimates and action preferences for the 2D maze experiments, we will use a simple 3 layer deep neural network. Specifically, all neural networks will have the following architecture
+\begin{figure}[H]
+    \center
+    \includegraphics[width=0.6\linewidth]{figs/nn_architecture.png}
+    \label{fig:nn_arch}
+\end{figure}
+where the output vector could be a $1 \times 4$ vector of action preferences or $1 \times 1$ state value estimate depending on the use of the neural network. Note that we will also be using leaky-ReLU for all non-linear activation functions.
 
 \chapter{Experimental Results and Extension on Original Work}
 \section{Gridworld Environment}
@@ -884,7 +871,7 @@ We focus on replicating the results observed using a simple 2D maze environment.
 \begin{figure}[H]
     \center
     \includegraphics[width=0.3\linewidth]{figs/grid4.png}
-    \caption{Environment 4 rendered from \textbf{a Github's implementation of the Distral paper}}
+    \caption{Environment 4 rendered from a Github's \cite{alfredo_github} implementation of the Distral paper}
     \label{fig4.1}
 \end{figure}
 Furthermore, the original paper states that each state consists of the agent's current location, action and reward from the previous time step.\\
@@ -1306,15 +1293,13 @@ As shown above, the average duration and reward for Distral 1 col beta rivals Di
 
 \chapter{Conclusion and Suggestions on Further Work}
 
-can use SQL plus DQN framework as mentioned in the rainbow paper \cite{hessel2018rainbow}\\
+In this thesis we have provided an in-depth explanation of the algorithms proposed in the original work through a detailed pseudo code for the Distral algorithms under both the SQL and regularized AC frameworks. We have also provided a chronological description of previous algorithms which led up to the multitask algorithms defined in Teh et al. Following that, we replicated the results of the original work for Distral 2 col via SQL on the 2D mazes. In addition, we extended the original experiments on the 2D mazes by testing both algorithms on the regularized AC frameworks and have found that their performance are consistently worse than the same algorithms implemented under the SQL framework. The discussion of the difference in performance between the algorithms implemented in SQL and regularized AC was not discussed in the original work. This lack of analysis is addressed in the results section, in which we discuss in-depth regarding the possible explanations for the algorithms' poor performance when implemented under regularized AC framework. Furthermore, we have discovered the importance of multiplying the inverse temperature coefficient $\beta$ when calculating the task-specific policies. This discovery gave rise to a new variant called Distral 1 col beta, which has significantly better than Distral 1 col and has a similar performance to Distral 2 col under the SQL framework.\\
 
-can integrate the Distral algorithms with SAC instead of regularized policy gradient, as mentioned in \cite{haarnoja2018soft}\\
+For future work we can implement the Distral algorithms in SQL framework, but integrate other concepts known to improve performance of DQN. Some examples include prioritized experience replay and double Q-learning, which were core concepts in the Rainbow algorithm \cite{hessel2018rainbow} that were responsible for the performance boost. We can also try to implement the Distral algorithms with the SAC framework instead of regularized policy gradient, as mentioned in \cite{haarnoja2018soft}.
+Furthermore, under a less restrictive time constraint, we may be able to train the Distral algorithms on DeepMind lab's environments to further study the behaviours of the algorithms under more sophisticated environments. Lastly, another approach that would help the algorithms generalize to more tasks is to find an alternative way to circumvent the requirement of same action and state space across tasks. \textbf{A possible alternative could be ..}
 
-can scale up experiments and train on deepmind lab\\
 
 in all the other experiments done by deepmind in the depmind lab, Distral 2 col consistently outperform Distral 1 col, so don't know why we need distral 1 col in the first place?\\
-
-can find an alternative way to circumvent the requirement of same action and state space across tasks so the algorithms can be more generalized.
 
 \appendix
 

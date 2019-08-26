@@ -23,7 +23,7 @@ parser.add_argument('--log-interval', type=int, default=5, metavar='N',
 args = parser.parse_args()
 
 import sys
-sys.path.append('../envs/')
+sys.path.append('../../envs/')
 from gridworld_env import GridworldEnv
 
 class Policy(nn.Module):
@@ -31,17 +31,11 @@ class Policy(nn.Module):
     def __init__(self, input_size, num_actions ):
 
         super(Policy, self).__init__()
-        # define actor network
+        # define actor-critic network
         self.act1 = nn.Linear(input_size, 64)
         self.act2 = nn.Linear(64, 128)
         self.act3 = nn.Linear(128, 64)
         self.action_head = nn.Linear(64, num_actions) 
-
-        # define critic network
-        self.val1 = nn.Linear(input_size, 64)
-        self.val2 = nn.Linear(64, 128)
-        self.val3 = nn.Linear(128, 64)
-        self.value_head = nn.Linear(64, num_actions)
 
         self.saved_actions = [] 
         self.rewards = [] 
@@ -52,13 +46,9 @@ class Policy(nn.Module):
         act = F.relu(self.act1(x))
         act = F.relu(self.act2(act))
         act = F.relu(self.act3(act))
-        action_scores = F.softmax(self.action_head(act), dim=-1) 
+        logits_action_scores = self.action_head(act)
 
-        val = F.relu(self.val1(x))
-        val = F.relu(self.val2(val))
-        val = F.relu(self.val3(val))
-        value_est = self.value_head(val)
-        return action_scores, value_est
+        return logits_action_scores
 
 class Distilled(nn.Module):
 
@@ -84,14 +74,15 @@ class Distilled(nn.Module):
         return action_scores, action_pref
 
 
-def select_action(state, policy, distilled, task_id):
+def select_action(state, policy, distilled, task_id, beta):
 
     # with torch.no_grad():
     # Format the state
     state = torch.from_numpy(state).float()
 
     # Run the policy
-    probs, _ = policy.forward(Variable(state))
+    Q = policy.forward(Variable(state))
+    probs = F.softmax(beta*Q, dim=-1)
     policy.pi_prob.append(probs)
 
     # Obtain the most probable action for the policy
@@ -139,11 +130,11 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     states, actions = np.asarray(policy.state_action)[:,0], np.asarray(policy.state_action)[:,1]
     states, actions = np.array([*states]), np.array([*actions]).reshape(-1,1)
 
-    _ , q_thetas = policy(torch.Tensor(states))
+    q_thetas = policy(torch.Tensor(states))
 
     # q_thetas = q_thetas.gather(1,torch.tensor(actions))
-    temp_term = beta*q_thetas - torch.max(beta*q_thetas)
-    v_thetas = torch.log((torch.pow(p0_probs, alpha) *torch.exp(temp_term)).sum(1)) / beta # from equation 55 bekerley paper
+    # temp_term = beta*q_thetas - torch.max(beta*q_thetas)
+    v_thetas = torch.log((torch.pow(p0_probs, alpha) *torch.exp(beta*q_thetas)).sum(1)) / beta # from equation 55 bekerley paper
 
     q_values = np.zeros(len(states))
     v_val = final_state_value
@@ -181,7 +172,7 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
 
     for param in policy.parameters():
         # if param.grad is not None:
-        param.grad.data.clamp_(-100, 100)
+        param.grad.data.clamp_(-500, 500)
 
     opt_policy.step()
 
@@ -281,7 +272,7 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
             for t in range(max_num_steps_per_episode):
 
                 # Run our policy
-                action = select_action(state, models[i_env], distilled, i_env)
+                action = select_action(state, models[i_env], distilled, i_env, beta)
 
                 next_state, reward, done, _ = env.step(action.item())
                 models[i_env].rewards.append(reward)
@@ -299,7 +290,7 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
 
             # get the value estimate of the final state according to equation 7 from distral paper
             next_state = torch.from_numpy(np.asarray(next_state)).float()
-            _, action_pref_temp = models[i_env](next_state)
+            action_pref_temp = models[i_env](next_state)
             pi_0_temp, _ = distilled(next_state)
 
             temp_term = beta*action_pref_temp - torch.max(beta*action_pref_temp)
@@ -329,4 +320,4 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
 
 if __name__ == '__main__':
     # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
-    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200, beta=10)
+    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.00025, num_episodes=200, beta=5)

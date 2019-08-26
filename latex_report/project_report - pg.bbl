@@ -5,6 +5,10 @@ Josh Achiam et~al.
 \newblock Spinning up in deep rl, 2018--.
 \newblock [Online; accessed 9-8-2019].
 
+\bibitem{alfredo_github}
+Alfredo de~la Fuente and Anastasia Koloskova.
+\newblock {Robust-Multitask-RL}, 2019.
+
 \bibitem{fox2015taming}
 Roy Fox, Ari Pakman, and Naftali Tishby.
 \newblock Taming the noise in reinforcement learning via soft updates.
