@@ -179,19 +179,19 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
     q_values = torch.tensor(q_values).float().unsqueeze(1).detach()
 
     # MSE for 1 step TD
-    critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
-    # critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
+    # critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
+    critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
 
     # get losses for current task, from equation 9 from Teh et al.
-    # for t, (log_prob_i) in enumerate(policy_actions): 
-    #     advantage = (q_values[t] - v_thetas[t]).detach()
-    #     task_policy_loss.append(log_prob_i * advantage)
+    for t, (log_prob_i) in enumerate(policy_actions): 
+        advantage = (q_values[t] - v_thetas[t]).detach()
+        task_policy_loss.append(log_prob_i * advantage)
 
     # gammas_episode = [gamma**i for i in range(len(policy_actions))]
-    for t, (log_prob_i) in enumerate(policy_actions): 
+    # for t, (log_prob_i) in enumerate(policy_actions): 
         # dis_rwd = np.asarray(gammas_episode[:len(reg_rewards[t:])]) * reg_rewards[t:]
         # dis_rwd = [g*rwd for g,rwd in zip(gammas_episode,reg_rewards[t:])]
-        task_policy_loss.append(log_prob_i * np.sum(reg_rewards[t:]))
+        # task_policy_loss.append(log_prob_i * np.sum(reg_rewards[t:]))
 
     opt_policy.zero_grad()
 
@@ -352,4 +352,4 @@ def trainDistral( file_name="Distral_2col_AC", list_of_envs=[GridworldEnv(5), Gr
 
 if __name__ == '__main__':
     # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
-    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200, beta=10)
+    trainDistral(list_of_envs=[GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0003, num_episodes=200, beta=5)

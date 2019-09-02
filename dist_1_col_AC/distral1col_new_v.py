@@ -181,7 +181,7 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
 
     for param in policy.parameters():
         # if param.grad is not None:
-        param.grad.data.clamp_(-100, 100)
+        param.grad.data.clamp_(-500, 500)
 
     opt_policy.step()
 
@@ -329,4 +329,4 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
 
 if __name__ == '__main__':
     # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
-    trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5)], learning_rate=0.001, num_episodes=200, beta=10)
+    trainDistral(list_of_envs=[GridworldEnv(7), GridworldEnv(8)], learning_rate=0.00005, num_episodes=200)

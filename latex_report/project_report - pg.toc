@@ -1,11 +1,13 @@
-\contentsline {chapter}{\numberline {1}Introduction and Key Results}{2}% 
-\contentsline {section}{\numberline {1.1}Objectives and Contributions}{2}% 
-\contentsline {chapter}{\numberline {2}Literature Review}{4}% 
-\contentsline {section}{\numberline {2.1}Prelude}{4}% 
-\contentsline {subsection}{\numberline {2.1.1}Markov Decision Process (MDP)}{6}% 
-\contentsline {subsection}{\numberline {2.1.2}A Note on Model-Based vs Model-Free RL}{9}% 
+\contentsline {chapter}{\numberline {1}Introduction}{2}% 
+\contentsline {section}{\numberline {1.1}Motivation and Problem Setting}{2}% 
+\contentsline {section}{\numberline {1.2}Objectives and Contributions}{3}% 
+\contentsline {section}{\numberline {1.3}Structure of the Thesis}{4}% 
+\contentsline {chapter}{\numberline {2}Literature Review}{5}% 
+\contentsline {section}{\numberline {2.1}Prelude}{5}% 
+\contentsline {subsection}{\numberline {2.1.1}Markov Decision Process (MDP)}{7}% 
+\contentsline {subsection}{\numberline {2.1.2}A Note on Model-Based vs Model-Free RL}{10}% 
 \contentsline {subsection}{\numberline {2.1.3}Policy Iteration}{10}% 
-\contentsline {subsection}{\numberline {2.1.4}Table of definitions}{12}% 
+\contentsline {subsection}{\numberline {2.1.4}Table of definitions}{13}% 
 \contentsline {section}{\numberline {2.2}Q-learning}{13}% 
 \contentsline {subsection}{\numberline {2.2.1}Deep Q-Learning (DQN)}{14}% 
 \contentsline {section}{\numberline {2.3}Policy Gradient}{15}% 
@@ -14,7 +16,7 @@
 \contentsline {subsection}{\numberline {2.3.3}Policy Gradient Theorem}{19}% 
 \contentsline {subsection}{\numberline {2.3.4}REINFORCE}{20}% 
 \contentsline {section}{\numberline {2.4}Advantage Actor Critic Model (A2C)}{21}% 
-\contentsline {subsection}{\numberline {2.4.1}Asynchronous Advantage Actor-Critic (A3C)}{24}% 
+\contentsline {subsection}{\numberline {2.4.1}Asynchronous Advantage Actor-Critic (A3C)}{23}% 
 \contentsline {section}{\numberline {2.5}Maximum Entropy Reinforcement Learning}{24}% 
 \contentsline {subsection}{\numberline {2.5.1}Bandit setting}{24}% 
 \contentsline {subsection}{\numberline {2.5.2}Solving entropy-regularized bandit problem}{25}% 
@@ -24,38 +26,38 @@
 \contentsline {subsection}{\numberline {2.5.6}Equivalence Between SQL and AC With Regularized Rewards}{28}% 
 \contentsline {subsection}{\numberline {2.5.7}Soft Actor-Critic (SAC)}{29}% 
 \contentsline {section}{\numberline {2.6}Multitask Reinforcement Learning}{30}% 
-\contentsline {subsection}{\numberline {2.6.1}Motivation}{30}% 
-\contentsline {subsection}{\numberline {2.6.2}Distral Architecture}{31}% 
-\contentsline {subsection}{\numberline {2.6.3}Distral algorithms and SQL framework}{33}% 
-\contentsline {subsection}{\numberline {2.6.4}Distral algorithms and Regularized AC framework}{35}% 
-\contentsline {subsection}{\numberline {2.6.5}Network Architectures of Distral Algorithms}{39}% 
-\contentsline {chapter}{\numberline {3}Experimental Results and Extension on Original Work}{40}% 
-\contentsline {section}{\numberline {3.1}Gridworld Environment}{40}% 
-\contentsline {section}{\numberline {3.2}Experiments under SQL framework}{41}% 
-\contentsline {subsection}{\numberline {3.2.1}Reproducing results from original work}{41}% 
-\contentsline {section}{\numberline {3.3}Extended Experiments under SQL framework}{43}% 
-\contentsline {subsection}{\numberline {3.3.1}Distral 1 col vs SQL}{43}% 
+\contentsline {subsection}{\numberline {2.6.1}Distral Architecture}{30}% 
+\contentsline {subsection}{\numberline {2.6.2}Distral algorithms and SQL framework}{32}% 
+\contentsline {subsection}{\numberline {2.6.3}Distral algorithms and Regularized AC framework}{34}% 
+\contentsline {subsection}{\numberline {2.6.4}Network Architectures of Distral Algorithms}{38}% 
+\contentsline {chapter}{\numberline {3}Experimental Results and Extension on Original Work}{39}% 
+\contentsline {section}{\numberline {3.1}Gridworld Environment}{39}% 
+\contentsline {section}{\numberline {3.2}Experiments under SQL framework}{40}% 
+\contentsline {subsection}{\numberline {3.2.1}Reproducing results from original work}{40}% 
+\contentsline {section}{\numberline {3.3}Extended Experiments under SQL framework}{41}% 
+\contentsline {subsection}{\numberline {3.3.1}Distral 1 col vs SQL}{41}% 
+\contentsline {subsubsection}{Environment 4 and 5}{42}% 
+\contentsline {subsubsection}{Environment 7 and 8}{42}% 
+\contentsline {subsubsection}{Environments 4, 5 and 7}{42}% 
+\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{43}% 
+\contentsline {subsection}{\numberline {3.3.2}Distral 2 col vs SQL}{43}% 
 \contentsline {subsubsection}{Environment 4 and 5}{43}% 
 \contentsline {subsubsection}{Environment 7 and 8}{44}% 
 \contentsline {subsubsection}{Environments 4, 5 and 7}{44}% 
 \contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{45}% 
-\contentsline {subsection}{\numberline {3.3.2}Distral 2 col vs SQL}{45}% 
+\contentsline {section}{\numberline {3.4}Experiments under regularized AC framework}{45}% 
+\contentsline {subsection}{\numberline {3.4.1}Distral 1 col vs A3C}{45}% 
 \contentsline {subsubsection}{Environment 4 and 5}{45}% 
 \contentsline {subsubsection}{Environment 7 and 8}{46}% 
 \contentsline {subsubsection}{Environments 4, 5 and 7}{46}% 
 \contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{46}% 
-\contentsline {section}{\numberline {3.4}Experiments under regularized AC framework}{47}% 
-\contentsline {subsection}{\numberline {3.4.1}Distral 1 col vs A3C}{47}% 
+\contentsline {subsection}{\numberline {3.4.2}Distral 2 col vs A3C}{47}% 
 \contentsline {subsubsection}{Environment 4 and 5}{47}% 
 \contentsline {subsubsection}{Environment 7 and 8}{47}% 
 \contentsline {subsubsection}{Environments 4, 5 and 7}{48}% 
 \contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{48}% 
-\contentsline {subsection}{\numberline {3.4.2}Distral 2 col vs A3C}{49}% 
-\contentsline {subsubsection}{Environment 4 and 5}{49}% 
-\contentsline {subsubsection}{Environment 7 and 8}{49}% 
-\contentsline {subsubsection}{Environments 4, 5 and 7}{50}% 
-\contentsline {subsubsection}{Environments 4, 5, 6, 7, 8}{50}% 
-\contentsline {section}{\numberline {3.5}Distral 1 col vs Distral 2 col}{50}% 
-\contentsline {subsection}{\numberline {3.5.1}Distral 1 col beta vs Distral 2 col under SQL framework}{53}% 
-\contentsline {chapter}{\numberline {4}Conclusion and Suggestions on Further Work}{55}% 
-\contentsline {chapter}{\numberline {A}Figures, tables and pseudocode}{61}% 
+\contentsline {section}{\numberline {3.5}Distral 1 col vs Distral 2 col}{48}% 
+\contentsline {subsection}{\numberline {3.5.1}Distral 1 col beta vs Distral 2 col under SQL framework}{52}% 
+\contentsline {subsection}{\numberline {3.5.2}SQL vs regularized AC framework}{52}% 
+\contentsline {chapter}{\numberline {4}Conclusion and Suggestions on Further Work}{54}% 
+\contentsline {chapter}{\numberline {A}Figures, tables and pseudocode}{60}% 
