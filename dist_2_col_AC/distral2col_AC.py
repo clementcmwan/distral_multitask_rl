@@ -121,7 +121,7 @@ def select_action(state, policy, distilled, task_id, alpha, beta):
 
 
 # actor critic framework for updating the task policy and q values for current task
-def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, final_state_value, task_id):
+def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, final_state_value, task_id, n_step):
 
     task_policy_loss = []
 
@@ -162,7 +162,7 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
 
     # n step td learning
     reg_rewards = []
-    n = 1
+    n = n_step
     # get the vector of discount factors
     gammas = [gamma**i for i in range(n)]
     # get the regularized rewards
@@ -268,8 +268,9 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
         del distilled.pi_prob[ind][:]
 
 
-def trainDistral( file_name="Distral_2col_AC", list_of_envs=[GridworldEnv(5), GridworldEnv(4)], batch_size=128, gamma=0.95, alpha=0.8,
-            beta=5, num_episodes=200, max_num_steps_per_episode=1000, learning_rate=0.001, verbose=True):
+def trainDistral( file_name="Distral_2col_AC", list_of_envs=[GridworldEnv(5), GridworldEnv(4)],
+             batch_size=128, gamma=0.95, alpha=0.8, beta=5, num_episodes=200,
+             max_num_steps_per_episode=1000, learning_rate=0.001, n_step=1, verbose=True):
 
     # Specify Environment conditions
     input_size = list_of_envs[0].observation_space.shape[0]
@@ -333,7 +334,7 @@ def trainDistral( file_name="Distral_2col_AC", list_of_envs=[GridworldEnv(5), Gr
             task_specific_losses.append(task_specific_update(models[i_env], distilled,
                                                              optimizers[i_env], alpha,
                                                              beta, gamma, final_state_value,
-                                                             i_env))
+                                                             i_env, n_step))
 
         # update distilled policy
         finish_episode(task_specific_losses, models, distilled, opt_distilled, alpha, beta, gamma)

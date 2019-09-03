@@ -96,7 +96,6 @@ def select_action(state, policy, distilled, task_id):
 
     # Obtain the most probable action for the policy
     m = Categorical(probs)
-    # action = torch.tensor([np.random.choice(4, 1, p=probs.detach().numpy())])
     action =  m.sample() 
     policy.saved_actions.append( m.log_prob(action))
     policy.state_action.append([state.numpy(),action.numpy()])
@@ -108,15 +107,14 @@ def select_action(state, policy, distilled, task_id):
 
     # Obtain the most probably action for the distilled policy
     m = Categorical(probs0)
-    # action_tmp =  m.sample() 
     distilled.saved_actions[task_id].append( m.log_prob(action) )
 
-    # Return the most probable action for the policy
+    # Return the sampled action for the policy
     return action
 
 
 # actor critic framework for updating the task policy and q values for current task
-def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, final_state_value, task_id):
+def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, final_state_value, task_id, n_step):
 
     task_policy_loss = []
 
@@ -141,16 +139,16 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
 
     _ , q_thetas = policy(torch.Tensor(states))
 
-    # q_thetas = q_thetas.gather(1,torch.tensor(actions))
     temp_term = beta*q_thetas - torch.max(beta*q_thetas)
-    v_thetas = torch.log((torch.pow(p0_probs, alpha) *torch.exp(temp_term)).sum(1)) / beta # from equation 55 bekerley paper
+    # from equation 55 from Schulman et al.
+    v_thetas = torch.log((torch.pow(p0_probs, alpha) *torch.exp(temp_term)).sum(1)) / beta 
 
     q_values = np.zeros(len(states))
     v_val = final_state_value
 
-    # n step td learning, n = 10
+    # n step td learning
     reg_rewards = []
-    n = 1
+    n = n_step
     gammas = [gamma**i for i in range(n)]
     for t in range(len(rewards)):
         reg_rewards.append(rewards[t] + (alpha/beta)*distill_actions[t] - (1./beta)*policy_actions[t])
@@ -162,11 +160,9 @@ def task_specific_update(policy, distilled, opt_policy, alpha, beta, gamma, fina
         v_val = v_thetas[t]
 
     q_values = torch.tensor(q_values).float().unsqueeze(1).detach()
-    # q_values = (q_values - q_values.mean())/(q_values.std() + 1e-15)
 
     # MSE for 1 step TD
     critic_loss = F.mse_loss(q_values, v_thetas.unsqueeze(1))
-    # critic_loss = F.smooth_l1_loss(q_values, v_thetas.unsqueeze(1))
 
     # get losses for current task, from equation 9
     for t, (log_prob_i) in enumerate(policy_actions): 
@@ -244,9 +240,8 @@ def finish_episode(task_specific_loss, policies, distilled, opt_distilled, alpha
         del distilled.pi_prob[ind][:]
 
 
-def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), GridworldEnv(4)], batch_size=128, gamma=0.95, alpha=0.8,
-            beta=5, num_episodes=200,
-            max_num_steps_per_episode=1000, learning_rate=0.001):
+def trainDistral( file_name="Distral_1col_AC", list_of_envs=[GridworldEnv(4), GridworldEnv(5)], batch_size=128, gamma=0.95, alpha=0.8,
+            beta=5, num_episodes=200,max_num_steps_per_episode=1000, learning_rate=0.001, n_step=1):
 
     # Specify Environment conditions
     input_size = list_of_envs[0].observation_space.shape[0]
@@ -312,7 +307,7 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
             task_specific_losses.append(task_specific_update(models[i_env], distilled,
                                                              optimizers[i_env], alpha,
                                                              beta, gamma, final_state_value,
-                                                             i_env))
+                                                             i_env, n_step))
 
         finish_episode(task_specific_losses, models, distilled, opt_distilled, alpha, beta, gamma)
 
@@ -322,11 +317,10 @@ def trainDistral( file_name="Distral_1col", list_of_envs=[GridworldEnv(5), Gridw
                 i_episode, i, episode_duration[i_episode][i], episode_rewards[i_episode][i]))
 
 
-    np.save(file_name + '-distral0-rewards' , episode_rewards)
-    np.save(file_name + '-distral0-durations' , episode_duration)
+    np.save(file_name + '-rewards' , episode_rewards)
+    np.save(file_name + '-durations' , episode_duration)
 
     print('Completed')
 
 if __name__ == '__main__':
-    # trainDistral(list_of_envs=[GridworldEnv(4), GridworldEnv(5), GridworldEnv(6), GridworldEnv(7), GridworldEnv(8)], learning_rate=0.0001, num_episodes=200)
     trainDistral(list_of_envs=[GridworldEnv(7), GridworldEnv(8)], learning_rate=0.00005, num_episodes=200)

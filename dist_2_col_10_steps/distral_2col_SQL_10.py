@@ -7,38 +7,29 @@ import math
 import numpy as np
 from memory_replay import ReplayMemory, Transition
 from network import DQN, select_action, optimize_model, Tensor, optimize_policy, PolicyNetwork
-# from network import DQN, select_action, optimize_model, optimize_policy, PolicyNetwork
 import sys
-sys.path.append('../../envs/')
+sys.path.append('../envs/')
 from gridworld_env import GridworldEnv
 
-def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
+def trainD(file_name="Distral_2col_SQL_10", list_of_envs=[GridworldEnv(5),
             GridworldEnv(4), GridworldEnv(6)], batch_size=128, gamma=0.999, alpha=0.8,
             beta=5, eps_start=0.9, eps_end=0.05, eps_decay=5,
             is_plot=False, num_episodes=200,
             max_num_steps_per_episode=1000, learning_rate=0.001,
-            memory_replay_size=10000, memory_policy_size=1000):
+            memory_replay_size=10000, memory_policy_size=1000, n_step=10):
     """
-    Soft Q-learning training routine. Retuns rewards and durations logs.
-    Plot environment screen
+    Soft Q-learning training routine. Returns rewards and durations logs.
     """
     num_actions = list_of_envs[0].action_space.n
     input_size = list_of_envs[0].observation_space.shape[0]
     num_envs = len(list_of_envs)
     policy = PolicyNetwork(input_size, num_actions)
-    models = [DQN(input_size,num_actions) for _ in range(0, num_envs)]   ### Add torch.nn.ModuleList (?)
-    memories = [ReplayMemory(memory_replay_size, memory_policy_size) for _ in range(0, num_envs)]
-
-    use_cuda = torch.cuda.is_available()
-    if use_cuda:
-        policy.cuda()
-        for model in models:
-            model.cuda()
+    models = [DQN(input_size,num_actions) for _ in range(0, num_envs)]
+    memories = [ReplayMemory(memory_replay_size, memory_policy_size, n_step, gamma) for _ in range(0, num_envs)]
 
     optimizers = [optim.Adam(model.parameters(), lr=learning_rate)
                     for model in models]
     policy_optimizer = optim.Adam(policy.parameters(), lr=learning_rate)
-    # optimizer = optim.RMSprop(model.parameters(), )
 
     episode_durations = [[] for _ in range(num_envs)]
     episode_rewards = [[] for _ in range(num_envs)]
@@ -47,38 +38,23 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
     episodes_done = np.zeros(num_envs)
     current_time = np.zeros(num_envs)
 
-    distilled_logits_magnitude = np.zeros((num_episodes,num_envs))
-    policy_logits_magnitude = np.zeros((num_episodes,num_envs))
-    # keep track of num of times a random action is picked
-    num_rand = np.zeros(num_envs)
-
     # Initialize environments
     states = []
     for env in list_of_envs:
         states.append(torch.from_numpy( env.reset() ).type(torch.FloatTensor).view(-1,input_size))
 
     while np.min(episodes_done) < num_episodes:
-        # TODO: add max_num_steps_per_episode
-
-        # Optimization is given by alterating minimization scheme:
+        # Optimization is given by alternating minimization scheme:
         #   1. do the step for each env
         #   2. do one optimization step for each env using "soft-q-learning".
         #   3. do one optimization step for the policy
 
         for i_env, env in enumerate(list_of_envs):
-        
+
             # select an action
-            action, pi_0_norm, pi_i_norm = select_action(states[i_env], policy, models[i_env], num_actions,
+            action = select_action(states[i_env], policy, models[i_env], num_actions,
                                     eps_start, eps_end, eps_decay,
                                     episodes_done[i_env], alpha, beta)
-
-
-            if episodes_done[i_env] < num_episodes:
-                if pi_0_norm + pi_i_norm == 0:
-                    num_rand[i_env] += 1
-                else:
-                    distilled_logits_magnitude[int(episodes_done[i_env]), i_env] += pi_0_norm
-                    policy_logits_magnitude[int(episodes_done[i_env]), i_env] += pi_i_norm
 
             steps_done[i_env] += 1
             current_time[i_env] += 1
@@ -93,7 +69,8 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
 
             # Store the transition in memory
             time = Tensor([current_time[i_env]])
-            memories[i_env].push(states[i_env], action, next_state, reward, time)
+            memories[i_env].push(models[i_env], policy, alpha, beta, states[i_env], action, next_state, reward, time)
+
 
             # Perform one step of the optimization (on the target network)
             optimize_model(policy, models[i_env], optimizers[i_env],
@@ -102,21 +79,13 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
             # Update state
             states[i_env] = next_state
 
-            # Check if agent reached target
+            # Check if agent reached target or exceeded max number of steps per episode
             if done or current_time[i_env] >= max_num_steps_per_episode:
-                if episodes_done[i_env] <= num_episodes:
+                if episodes_done[i_env] <= 200:
                     print("ENV:", i_env, "iter:", episodes_done[i_env],
                         "\treward:{0:.2f}".format(env.episode_total_reward),
                         "\tit:", current_time[i_env], "\texp_factor:", eps_end +
                         (eps_start - eps_end) * math.exp(-1. * episodes_done[i_env] / eps_decay))
-
-
-                if episodes_done[i_env] < num_episodes:
-                    # average the cumulative norms
-                    distilled_logits_magnitude[int(episodes_done[i_env]), i_env] /= (current_time[i_env] - num_rand[i_env])
-                    policy_logits_magnitude[int(episodes_done[i_env]), i_env] /= (current_time[i_env] -num_rand[i_env])
-                    num_rand[i_env] = 0
-
 
                 episode_rewards[i_env].append(env.episode_total_reward)
                 episodes_done[i_env] += 1
@@ -125,26 +94,20 @@ def trainD(file_name="Distral_1col", list_of_envs=[GridworldEnv(5),
 
                 states[i_env] = torch.from_numpy( env.reset() ).type(torch.FloatTensor).view(-1,input_size)
 
+        # Perform one step of the optimization on Distilled policy
         optimize_policy(policy, policy_optimizer, memories, batch_size,
                     num_envs, gamma, alpha, beta)
 
     print('Complete')
     env.render(close=True)
     env.close()
-    if is_plot:
-        plt.ioff()
-        plt.show()
 
     ## Store Results
-
-    np.save(file_name + '-distral-2col-rewards', episode_rewards)
-    np.save(file_name + '-distral-2col-durations', episode_durations)
-    np.save(file_name + '-distilled_logit_norms', distilled_logits_magnitude)
-    np.save(file_name + '-policy_logit_norms', policy_logits_magnitude)
+    np.save(file_name + '-rewards', episode_rewards)
+    np.save(file_name + '-durations', episode_durations)
 
     return models, policy, episode_rewards, episode_durations
 
 if __name__ == '__main__':
-    # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)], learning_rate=0.001)
-    # trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(7)], learning_rate=0.001)
-    trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5)], learning_rate=0.001)
+    trainD(list_of_envs=[GridworldEnv(4),GridworldEnv(5),GridworldEnv(6),GridworldEnv(7),GridworldEnv(8)],
+             learning_rate=0.001, max_num_steps_per_episode=100, num_episodes=1000, alpha=1.)

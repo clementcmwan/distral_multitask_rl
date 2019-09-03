@@ -62,7 +62,7 @@ class PolicyNetwork(nn.Module):
 def select_action(state, policy, model, num_actions,
                     EPS_START, EPS_END, EPS_DECAY, steps_done, alpha, beta):
     """
-    Selects whether the next action is choosen by our model or randomly
+    Selects whether the next action is chosen by our model or randomly
     """
     sample = random.random()
     eps_threshold = EPS_END + (EPS_START - EPS_END) * \
@@ -180,7 +180,6 @@ def optimize_model(policy, model, optimizer, memory, batch_size,
 
     # Compute loss
     loss = F.mse_loss(state_action_values, expected_state_action_values)
-    # loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
 
     # Optimize the model
     optimizer.zero_grad()

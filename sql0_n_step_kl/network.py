@@ -23,8 +23,7 @@ class DQN(nn.Module):
         super(DQN, self).__init__()
         self.linear1 = nn.Linear(input_size, 64)
         self.linear2 = nn.Linear(64, 128)
-        self.linear3 = nn.Linear(128, 128)
-        self.linear4 = nn.Linear(128, 64)
+        self.linear3 = nn.Linear(128, 64)
         self.head = nn.Linear(64, num_actions)
 
     def forward(self, x):
@@ -32,7 +31,6 @@ class DQN(nn.Module):
         x = F.leaky_relu(self.linear1(x))
         x = F.leaky_relu(self.linear2(x))
         x = F.leaky_relu(self.linear3(x))
-        x = F.leaky_relu(self.linear4(x))
         return self.head(x)
 
 def select_action(state, model, num_actions,
@@ -60,9 +58,7 @@ def optimize_model(model, target_model, optimizer, memory, BATCH_SIZE, GAMMA, BE
     # Compute a mask of non-final states and concatenate the batch elements
     non_final_mask = ByteTensor(tuple(map(lambda s: s is not None,
                                          n_state_batch)))
-    # We don't want to backprop through the expected action values and volatile
-    # will save us on temporarily changing the model parameters'
-    # requires_grad to False!
+
     non_final_next_states = torch.cat([s for s in n_state_batch if s is not None])
     non_final_next_states_action = torch.cat([action_batch[ind] for ind, s in enumerate(n_state_batch) if s is not None])
 
@@ -95,22 +91,12 @@ def optimize_model(model, target_model, optimizer, memory, BATCH_SIZE, GAMMA, BE
     expected_values_V = pi_prob * torch.exp(BETA * target_model(non_final_next_states)).sum(1).unsqueeze(1)
 
     next_state_values[non_final_mask] = (torch.log( expected_values_V.sum(1) ) / BETA).detach()
-    # next_state_values[non_final_mask] = (next_state_values[non_final_mask] - next_state_values[non_final_mask].mean()) - next_state_values[non_final_mask].std()
 
-    # Now, we don't want to mess up the loss with a volatile flag, so let's
-    # clear it. After this, we'll just end up with a Variable that has
-    # requires_grad=False
-    # next_state_values.volatile = False
     # Compute the expected Q values
-
-    assert math.isnan(next_state_values.sum()) != True
-    assert np.isinf(next_state_values.sum().detach()) != True
-
     expected_state_action_values = (next_state_values * GAMMA**memory.get_n()) + reward_batch
 
     # Compute Huber loss
     loss = F.mse_loss(state_action_values, expected_state_action_values.unsqueeze(1))
-    # loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
 
     # Optimize the model
     optimizer.zero_grad()

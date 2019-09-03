@@ -36,28 +36,25 @@ class ReplayMemory(object):
         if len(self.n_step_buffer) < self.n_step:
             return
 
-        # sum of discounted rewards
-        # R = sum([self.n_step_buffer[i][-2]*(self.gamma**i) for i in range(self.n_step)])
-
+        # summing discounted rewards
         with torch.no_grad():
             R = 0
             for i in range(self.n_step):
                 act = int(self.n_step_buffer[i][1])
                 ri = self.n_step_buffer[i][-2]
 
+                # calculating numerator of equation 8 from Teh et al.
                 term = alpha*target_model(self.n_step_buffer[i][0]) + beta *model(self.n_step_buffer[i][0])
                 max_term = torch.max(term)
-                # pi_i = torch.exp(term-max_term)/(torch.exp(term-max_term).sum(1))
+
                 pi_i = F.softmax(term-max_term, dim=1)[0]
                 pi_0 = F.softmax(target_model(self.n_step_buffer[i][0]), dim=1)[0]
 
                 log_term = (alpha/beta)*torch.log(pi_0[act]) - (1/beta)*torch.log(pi_i[act])
-                # print(f"1st:{torch.log(pi_0[act])}, 2nd:{torch.log(pi_i[act])}")
                 reg_ri = ri + log_term
 
                 R += self.gamma**i * reg_ri
 
-            # print(R)
             state, action, _, _, _ = self.n_step_buffer.pop(0)
 
             n_th_state = self.n_step_buffer[-1][0]
@@ -85,31 +82,3 @@ class ReplayMemory(object):
 
     def get_n(self):
         return self.n_step
-
-    # def get_n_step_rollout(self, indx_batch, gamma):
-
-    #     # returns sum of discounted rewards after rolling out for n steps for each sample
-
-    #     # get discounts from 2nd to 9th step
-    #     gammas = [gamma**i for i in range(1, self.n_step-1)]
-
-    #     # indx_batch are the time step/ indx of the currently sampled batch
-    #     # get the rewards of the n+1 th time step
-    #     rewards = []
-    #     for i in range(1, self.n_step-1):
-    #         indx_batch = indx_batch + 1
-    #         cur_rwd_batch = torch.tensor([self.memory[cur_indx][-2] for cur_indx in indx_batch]) 
-    #         rewards.append(cur_rwd_batch)
-
-    #     rewards = torch.stack(rewards).numpy()
-
-    #     # multiply the rewards with the correpsonding discount rates
-    #     dicounted_rewards = np.asarray(gammas).reshape(-1,1)*rewards
-    #     # sum the n-step rewards for each sample trajectory
-    #     dis_rwd_sum = np.sum(dicounted_rewards,axis =0).reshape(-1,1)
-
-    #     return torch.tensor(dis_rwd_sum)
-
-    # def get_n_th_transition(self, indx_batch):
-    #     # get the nth transition for each sample
-    #     return [self.memory[cur_indx] for cur_indx in indx_batch+self.n_step]
